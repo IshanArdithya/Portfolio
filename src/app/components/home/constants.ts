@@ -1,3 +1,11 @@
+import {
+  FaLinkedin,
+  FaGithub,
+  FaFacebook,
+  FaInstagram,
+  FaDiscord,
+} from "react-icons/fa";
+
 export type Profile = {
   name: string;
   role: string;
@@ -5,6 +13,17 @@ export type Profile = {
 };
 
 export type Tags = string[];
+
+export type Statistic = {
+  value: number;
+  label: string;
+};
+
+export type SocialLink = {
+  name: string;
+  url: string;
+  icon: React.ElementType;
+};
 
 export const profile: Profile = {
   name: "Ishan Ardithya",
@@ -20,4 +39,51 @@ export const tags: Tags = [
   "Node.js",
   "TailwindCSS",
   "PHP",
+];
+
+export const statistics: Statistic[] = [
+  {
+    value: 23,
+    label: "Age",
+  },
+  {
+    value: 3,
+    label: "Years of experience",
+  },
+  {
+    value: 10,
+    label: "Projects worked on",
+  },
+  {
+    value: 5,
+    label: "Projects collaborated",
+  },
+];
+
+export const socialLinks: SocialLink[] = [
+  {
+    name: "LinkedIn",
+    url: "https://www.linkedin.com",
+    icon: FaLinkedin,
+  },
+  {
+    name: "GitHub",
+    url: "https://github.com",
+    icon: FaGithub,
+  },
+  {
+    name: "Facebook",
+    url: "https://facebook.com",
+    icon: FaFacebook,
+  },
+  {
+    name: "Instagram",
+    url: "https://instagram.com",
+    icon: FaInstagram,
+  },
+  {
+    name: "Instagram",
+    url: "https://discord.com",
+    icon: FaDiscord,
+  },
 ];
