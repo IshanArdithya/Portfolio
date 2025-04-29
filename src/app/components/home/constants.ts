@@ -6,10 +6,16 @@ import {
   FaDiscord,
 } from "react-icons/fa";
 
+export type NavBar = {
+  text: string;
+  href: string;
+};
+
 export type Profile = {
   name: string;
   role: string;
   description: string;
+  image: string;
 };
 
 export type Tags = string[];
@@ -25,11 +31,39 @@ export type SocialLink = {
   icon: React.ElementType;
 };
 
+export const navBar: NavBar[] = [
+  {
+    text: "Home",
+    href: "/",
+  },
+  {
+    text: "Education",
+    href: "#education",
+  },
+  {
+    text: "Projects",
+    href: "#projects",
+  },
+  {
+    text: "Experience",
+    href: "#experience",
+  },
+  {
+    text: "Personal",
+    href: "#personal",
+  },
+  {
+    text: "Contact",
+    href: "#contact",
+  },
+];
+
 export const profile: Profile = {
   name: "Ishan Ardithya",
   role: "Software Engineer",
   description:
     "I am a full-stack developer specializing in modern front-end frameworks like React and Next.js, and back-end technologies such as Node.js, Express.js, MongoDB, and MySQL.",
+  image: "https://radnaabazar.vercel.app/assets/mascot.gif",
 };
 
 export const tags: Tags = [
@@ -63,22 +97,22 @@ export const statistics: Statistic[] = [
 export const socialLinks: SocialLink[] = [
   {
     name: "LinkedIn",
-    url: "https://www.linkedin.com",
+    url: "https://www.linkedin.com/in/ishan-ardithya",
     icon: FaLinkedin,
   },
   {
     name: "GitHub",
-    url: "https://github.com",
+    url: "https://github.com/IshanArdithya",
     icon: FaGithub,
   },
   {
     name: "Facebook",
-    url: "https://facebook.com",
+    url: "https://www.facebook.com/ishan.ardithya/",
     icon: FaFacebook,
   },
   {
     name: "Instagram",
-    url: "https://instagram.com",
+    url: "https://www.instagram.com/ishan_ardithya/",
     icon: FaInstagram,
   },
   {

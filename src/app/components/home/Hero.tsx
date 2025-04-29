@@ -5,17 +5,20 @@ import ButtonOne from "../buttons/ButtonOne";
 import { profile, socialLinks, statistics, tags } from "./constants";
 import Marquee from "react-fast-marquee";
 import { useTheme } from "@/context/ThemeContext";
+import { AnimatedCircleGridPattern } from "./GridPattern";
 
 export default function Hero() {
   const { theme } = useTheme();
 
   return (
-    <div
-      className={`relative min-h-screen flex flex-col items-center justify-between px-6 pt-20 pb-10 overflow-hidden ${theme.background} ${theme.text}`}
-    >
+    <>
       <div className="relative w-full pt-20 flex flex-col items-center justify-center max-w-7xl">
+        <div className="absolute inset-0 w-full h-full z-1 opacity-30">
+          <AnimatedCircleGridPattern />
+        </div>
+
         {/* main content */}
-        <div className="relative grid grid-cols-1 md:grid-cols-2 items-center gap-10 w-full xl:pb-24">
+        <div className="relative grid grid-cols-1 md:grid-cols-2 items-center gap-10 w-full xl:pb-24 z-2">
           {/* left section */}
           <div className="text-center md:text-left">
             <h1 className="text-6xl font-bold leading-tight tracking-tight">
@@ -31,7 +34,7 @@ export default function Hero() {
             </p>
 
             {/* tags */}
-            <Marquee pauseOnHover={true} speed={40} className="max-w-md mb-5">
+            <Marquee pauseOnHover={false} speed={40} className="max-w-md mb-5">
               <div className="flex flex-wrap mb-8">
                 {tags.map((tag, index) => (
                   <span
@@ -55,11 +58,11 @@ export default function Hero() {
           <div className="flex justify-center relative">
             <div className="absolute -inset-2 rounded-3xl blur-xl transition duration-500" />
             <Image
-              src="https://radnaabazar.vercel.app/assets/mascot.gif"
-              alt="Illustration"
+              src={profile.image}
+              alt="Profile Photo"
               width={600}
               height={600}
-              className="w-full max-w-sm rounded-3xl shadow-2xl object-cover"
+              className="w-full max-w-sm rounded-full shadow-2xl object-cover"
             />
           </div>
         </div>
@@ -110,6 +113,6 @@ export default function Hero() {
           <div className={`flex-grow border-t ${theme.border}`}></div>
         </div>
       </section>
-    </div>
+    </>
   );
 }
