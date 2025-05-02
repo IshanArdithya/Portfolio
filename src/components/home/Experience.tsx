@@ -34,7 +34,7 @@ export default function Experience() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <motion.div
-                className={`group relative overflow-hidden border ${theme.borderTwo} rounded-2xl p-6 md:p-8 backdrop-blur-sm bg-opacity-5 bg-gray-800/30
+                className={`group relative overflow-hidden border ${theme.borderMuted} rounded-2xl p-6 md:p-8 backdrop-blur-sm bg-opacity-5 bg-gray-800/30
                 }`}
                 whileHover={{
                   scale: 1.02,
@@ -43,13 +43,15 @@ export default function Experience() {
                 transition={{ duration: 0.2 }}
               >
                 <div
-                  className={`absolute inset-0 bg-gradient-to-r ${theme.gradient} ${theme.gradientTwo} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
+                  className={`absolute inset-0 bg-gradient-to-r ${theme.gradientFrom} ${theme.gradientTo} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
                 ></div>
 
                 <div className="flex flex-col md:flex-row gap-8 relative z-10">
                   <div className="flex-shrink-0 flex items-start justify-center md:justify-start">
                     <div className="relative">
-                      <div className="relative border-white/[0.3] rounded-2xl border-2">
+                      <div
+                        className={`relative ${theme.borderMuted} rounded-2xl border-2 transition-transform duration-700 group-hover:animate-pulse`}
+                      >
                         <Image
                           src={
                             exp.companylogo || "/placeholderlogo_company.png"
@@ -66,7 +68,7 @@ export default function Experience() {
                   <div className="flex-1 space-y-4">
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                       <span
-                        className={`text-sm font-medium px-3 py-1 rounded-full inline-flex items-center ${theme.accent} bg-opacity-20 w-fit`}
+                        className={`text-sm font-medium px-3 py-1 rounded-full inline-flex items-center ${theme.backgroundAccent} bg-opacity-20 w-fit`}
                       >
                         {exp.startDate} — {exp.endDate}
                       </span>
@@ -104,7 +106,7 @@ export default function Experience() {
 
                     <div>
                       <h3
-                        className={`text-2xl font-bold mb-1 group-hover:${theme.accent} transition-colors duration-200`}
+                        className={`text-2xl font-bold mb-1 ${theme.groupHoverText} transition-colors duration-200`}
                       >
                         {exp.title}
                       </h3>
@@ -114,7 +116,7 @@ export default function Experience() {
                         </h4>
                       </div>
                       <p
-                        className={`${theme.textTwo} text-base leading-relaxed`}
+                        className={`${theme.textMuted} text-base leading-relaxed`}
                       >
                         {exp.description}
                       </p>
@@ -125,7 +127,7 @@ export default function Experience() {
                         {exp.tech.map((techName, t) => (
                           <motion.span
                             key={t}
-                            className={`rounded-full ${theme.accent} px-3 py-1 text-sm font-medium text-purple-50`}
+                            className={`rounded-full ${theme.backgroundAccent} px-3 py-1 text-sm font-medium text-purple-50`}
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                           >

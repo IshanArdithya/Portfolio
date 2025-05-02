@@ -12,7 +12,7 @@ type ThemeContextType = {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [themeKey, setThemeKey] = useState<ThemeKey>("teal");
+  const [themeKey, setThemeKey] = useState<ThemeKey>("indigo");
   const theme = themes[themeKey];
 
   return (

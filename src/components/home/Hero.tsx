@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import ButtonOne from "../buttons/ButtonOne";
+import ButtonOne from "@/components/ui/ButtonOne";
 import { profile, socialLinks, statistics, tags } from "./constants";
 import Marquee from "react-fast-marquee";
 import { useTheme } from "@/context/ThemeContext";
@@ -31,7 +31,7 @@ export default function Hero() {
                 {profile.role}
               </h3>
               <p
-                className={`opacity-90 ${theme.textTwo} max-w-lg text-base md:text-lg leading-relaxed mb-6`}
+                className={`opacity-90 ${theme.textMuted} max-w-lg text-base md:text-lg leading-relaxed mb-6`}
               >
                 {profile.description}
               </p>
@@ -46,7 +46,7 @@ export default function Hero() {
                   {tags.map((tag, index) => (
                     <span
                       key={index}
-                      className={`inline-block text-xs font-semibold mr-3 py-2 px-4 rounded-full ${theme.accent}`}
+                      className={`inline-block text-xs font-semibold mr-3 py-2 px-4 rounded-full ${theme.backgroundAccent}`}
                     >
                       {tag}
                     </span>
@@ -84,7 +84,7 @@ export default function Hero() {
                       {stat.value}
                     </span>
                     <p
-                      className={`max-w-[100px] mr-5 leading-snug tracking-wide ${theme.textTwo}`}
+                      className={`max-w-[100px] mr-5 leading-snug tracking-wide ${theme.textMuted}`}
                     >
                       {stat.label}
                     </p>

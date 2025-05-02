@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useTheme } from "@/context/ThemeContext";
-import { navBar } from "../home/constants";
+import { navBar } from "@/components/home/constants";
 
 export default function Header() {
   const { theme } = useTheme();

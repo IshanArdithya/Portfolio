@@ -11,7 +11,7 @@ const ButtonOne = ({ text, link }: { text: string; link: string }) => {
     // </Link>
     <Link href={link} passHref>
       <button
-        className={`${theme.textAccent} ${theme.borderAccent} text-sm font-semibold px-8 py-4 border-2 w-full uppercase rounded-full ${theme.hoverTextAccentTwo} ${theme.hoverButtonAccent} transition-all duration-150`}
+        className={`${theme.textAccent} ${theme.borderAccent} text-sm font-semibold px-8 py-4 border-2 w-full uppercase rounded-full ${theme.hoverTextAccent} ${theme.hoverBackgroundAccent} transition-all duration-150`}
       >
         {text}
       </button>

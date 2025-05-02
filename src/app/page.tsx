@@ -1,9 +1,9 @@
 "use client";
 
 import { useTheme } from "@/context/ThemeContext";
-import Hero from "./components/home/Hero";
-import Header from "./components/common/Header";
-import Experience from "./components/home/Experience";
+import Hero from "@/components/home/Hero";
+import Header from "@/components/common/Header";
+import Experience from "@/components/home/Experience";
 
 export default function Home() {
   const { theme } = useTheme();

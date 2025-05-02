@@ -1,37 +1,95 @@
-export type ThemeKey = "teal";
+export type ThemeKey = "indigo";
 
 export interface Theme {
-  background: string;
-  gradient: string;
-  gradientTwo: string;
+  primary: string;
+  secondary: string;
   accent: string;
+  neutral: string;
+
+  background: string;
+  backgroundAlt: string;
+  backgroundAccent: string;
+
   text: string;
-  textTwo: string;
+  textMuted: string;
   textAccent: string;
+
   border: string;
-  borderTwo: string;
+  borderMuted: string;
   borderAccent: string;
-  hoverBg: string;
+
+  hoverBackground: string;
+  hoverBackgroundAccent: string;
   hoverText: string;
-  hoverTextAccentTwo: string;
-  hoverButtonAccent: string;
+  hoverTextAccent: string;
+  hoverBorder: string;
+
+  groupHoverText: string;
+
+  buttonBackground: string;
+  buttonText: string;
+  buttonHoverBackground: string;
+  buttonHoverText: string;
+
+  cardBackground: string;
+  cardBorder: string;
+  cardHoverBorder: string;
+
+  navBackground: string;
+  navText: string;
+  navTextHover: string;
+
+  gradientFrom: string;
+  gradientTo: string;
 }
 
 export const themes: Record<ThemeKey, Theme> = {
-  teal: {
+  indigo: {
+    // base
+    primary: "indigo-500",
+    secondary: "indigo-700",
+    accent: "indigo-400",
+    neutral: "slate-800",
+
+    // background
     background: "bg-[rgb(28,28,34)]/100",
-    gradient: "from-indigo-500/10",
-    gradientTwo: "to-[rgb(28,28,34)]/10",
-    accent: "bg-indigo-500",
+    backgroundAlt: "bg-slate-800",
+    backgroundAccent: "bg-indigo-500",
+
+    // text
     text: "text-white",
-    textTwo: "text-white/80",
+    textMuted: "text-white/80",
     textAccent: "text-indigo-500",
+
+    // border
     border: "border-white",
-    borderTwo: "border-white/[0.2]",
+    borderMuted: "border-white/[0.2]",
     borderAccent: "border-indigo-500",
-    hoverBg: "hover:bg-indigo-500",
-    hoverText: "hover:text-indigo-400",
-    hoverTextAccentTwo: "hover:text-[rgb(28,28,34)]",
-    hoverButtonAccent: "hover:bg-indigo-500",
+
+    // hover
+    hoverBackground: "hover:bg-slate-800",
+    hoverBackgroundAccent: "hover:bg-indigo-600",
+    hoverText: "hover:text-indigo-300",
+    hoverTextAccent: "hover:text-[rgb(28,28,34)]",
+    hoverBorder: "hover:border-indigo-400",
+
+    groupHoverText: "group-hover:text-indigo-300",
+
+    buttonBackground: "bg-indigo-500",
+    buttonText: "text-white",
+    buttonHoverBackground: "hover:bg-indigo-600",
+    buttonHoverText: "hover:text-white",
+
+    cardBackground: "bg-slate-800",
+    cardBorder: "border-slate-700",
+    cardHoverBorder: "hover:border-indigo-400",
+
+    navBackground: "bg-slate-900",
+    navText: "text-white/80",
+    navTextHover: "hover:text-indigo-400",
+
+    // gradients
+    gradientFrom: "from-indigo-500/10",
+    gradientTo: "to-[rgb(28,28,34)]/10",
   },
 };
