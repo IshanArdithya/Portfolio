@@ -31,22 +31,32 @@ export type SocialLink = {
   icon: React.ElementType;
 };
 
+export type Experience = {
+  startDate: string;
+  endDate: string;
+  title: string;
+  company: string;
+  companylogo: string;
+  description: string;
+  links?: {
+    url: string;
+    type: "linkedin" | "website";
+  }[];
+  tech?: string[];
+};
+
 export const navBar: NavBar[] = [
   {
     text: "Home",
     href: "/",
   },
   {
-    text: "Education",
-    href: "#education",
+    text: "Experience",
+    href: "#experience",
   },
   {
     text: "Projects",
     href: "#projects",
-  },
-  {
-    text: "Experience",
-    href: "#experience",
   },
   {
     text: "Personal",
@@ -119,5 +129,24 @@ export const socialLinks: SocialLink[] = [
     name: "Instagram",
     url: "https://discord.com",
     icon: FaDiscord,
+  },
+];
+
+export const experiences: Experience[] = [
+  {
+    startDate: "2025 March",
+    endDate: "Present",
+    title: "Software Engineer Intern",
+    company: "Enored",
+    companylogo: "https://i.imgur.com/ssfQKfJ.jpeg",
+    description:
+      "Lorem ipsum dolor sit amet consectetur, adipisicing elit.Perspiciatis reprehenderit maxime distinctio assumenda optionemo repudiandae nulla esse tempore, quibusdam aspernatur quas aliquid molestias aut repellendus libero voluptatibus non consequatur sapiente delectus vero eveniet quod. Similique non, ratione quam doloremque voluptas magni praesentium ad aspernatur? Sit rerum, sapiente dolore ducimus, reiciendis, quia eaque tempora exercitationem molestias voluptas tempore accusamus maxime.",
+    links: [
+      {
+        type: "linkedin",
+        url: "https://www.linkedin.com/company/enoredglobal/",
+      },
+    ],
+    tech: ["React.js", "Next.js", "Express.js", "Node.js", "TailwindCSS"],
   },
 ];
