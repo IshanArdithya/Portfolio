@@ -80,7 +80,7 @@ export const themes: Record<ThemeKey, Theme> = {
     buttonHoverBackground: "hover:bg-indigo-600",
     buttonHoverText: "hover:text-white",
 
-    cardBackground: "bg-slate-800",
+    cardBackground: "bg-[rgb(22,22,29)]/30",
     cardBorder: "border-slate-700",
     cardHoverBorder: "hover:border-indigo-400",
 
@@ -90,6 +90,6 @@ export const themes: Record<ThemeKey, Theme> = {
 
     // gradients
     gradientFrom: "from-indigo-500/10",
-    gradientTo: "to-[rgb(28,28,34)]/10",
+    gradientTo: "to-[rgb(22,22,29)]/10",
   },
 };

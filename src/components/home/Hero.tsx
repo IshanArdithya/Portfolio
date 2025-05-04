@@ -5,7 +5,7 @@ import ButtonOne from "@/components/ui/ButtonOne";
 import { profile, socialLinks, statistics, tags } from "./constants";
 import Marquee from "react-fast-marquee";
 import { useTheme } from "@/context/ThemeContext";
-import { AnimatedCircleGridPattern } from "./GridPattern";
+import { AnimatedCircleGridPattern } from "@/components/home/GridPattern";
 
 export default function Hero() {
   const { theme } = useTheme();

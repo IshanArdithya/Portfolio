@@ -12,7 +12,7 @@ export default function Experience() {
 
   return (
     <section
-      className={`relative min-h-screen flex flex-col items-center justify-between px-6 py-20 overflow-hidden`}
+      className={`relative flex flex-col items-center justify-between px-6 py-20 overflow-hidden`}
     >
       <div className="relative w-full max-w-7xl mx-auto">
         <motion.h1
@@ -34,7 +34,7 @@ export default function Experience() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <motion.div
-                className={`group relative overflow-hidden border ${theme.borderMuted} rounded-2xl p-6 md:p-8 backdrop-blur-sm bg-opacity-5 bg-gray-800/30
+                className={`group relative overflow-hidden border ${theme.borderMuted} ${theme.cardBackground} rounded-2xl p-6 md:p-8 backdrop-blur-sm bg-opacity-5
                 }`}
                 whileHover={{
                   scale: 1.02,
