@@ -312,7 +312,7 @@ export const projects: Project[] = [
     category: "marketing",
     description:
       "tempora doloribus ab saepe illo quae repellendus omnis cum placeat cupiditate tenetur dolorem a quia fuga voluptate unde animi molestias incidunt sunt.",
-    image: "/images/projects/gg.png?height=300&width=400",
+    image: "",
     technologies: ["next", "react", "tailwind"],
     githubUrl: "https://github.com/",
   },
