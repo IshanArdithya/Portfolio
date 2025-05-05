@@ -5,21 +5,25 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaGlobe, FaLinkedin } from "react-icons/fa";
 import { experiences } from "./constants";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
 export default function Experience() {
   const { theme } = useTheme();
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: false, amount: 0.1 });
 
   return (
     <section
+      ref={sectionRef}
       className={`relative flex flex-col items-center justify-between px-6 py-20 overflow-hidden`}
     >
       <div className="relative w-full max-w-7xl mx-auto">
         <motion.h1
           className="text-6xl font-bold text-center mb-16"
           initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
+          transition={{ duration: 0.7, type: "spring", stiffness: 100 }}
         >
           Experience
         </motion.h1>
@@ -29,7 +33,7 @@ export default function Experience() {
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
