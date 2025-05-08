@@ -5,17 +5,12 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "radnaabazar.vercel.app",
-        port: "",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
         hostname: "i.imgur.com",
         port: "",
         pathname: "/**",
       },
     ],
+    domains: ["api.microlink.io"],
   },
 };
 
