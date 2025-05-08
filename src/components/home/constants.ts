@@ -63,6 +63,14 @@ export type Project = {
   url?: string;
 };
 
+export type Interests = {
+  title: string;
+  subtitle: string;
+  bgColor: string;
+  span: string;
+  image: string;
+};
+
 export const navBar: NavBar[] = [
   {
     text: "Home",
@@ -91,7 +99,7 @@ export const profile: Profile = {
   role: "Software Engineer",
   description:
     "I am a full-stack developer specializing in modern front-end frameworks like React and Next.js, and back-end technologies such as Node.js, Express.js, MongoDB, and MySQL.",
-  image: "https://radnaabazar.vercel.app/assets/mascot.gif",
+  image: "/images/profile/bangboo.gif",
 };
 
 export const tags: Tags = [
@@ -315,5 +323,43 @@ export const projects: Project[] = [
     image: "",
     technologies: ["next", "react", "tailwind"],
     githubUrl: "https://github.com/",
+  },
+];
+
+export const interests: Interests[] = [
+  {
+    title: "Programmer",
+    subtitle: "Coding my way through tech",
+    bgColor: "bg-indigo-800",
+    span: "col-span-1 lg:col-span-2",
+    image: "https://i.imgur.com/2DdpHIh.jpeg",
+  },
+  {
+    title: "Music",
+    subtitle: "From classics to modern",
+    bgColor: "bg-emerald-800",
+    span: "col-span-1",
+    image: "https://i.imgur.com/CwJDhzq.jpeg",
+  },
+  {
+    title: "Gaming",
+    subtitle: "Competitive Gamer",
+    bgColor: "bg-amber-700",
+    span: "col-span-1",
+    image: "https://i.imgur.com/IqkGPYd.png",
+  },
+  {
+    title: "Movies & Anime",
+    subtitle: "From films to anime, a visual journey",
+    bgColor: "bg-rose-800",
+    span: "col-span-1 lg:col-span-2",
+    image: "https://i.imgur.com/T4TgmlR.png",
+  },
+  {
+    title: "Books",
+    subtitle: "Manga stories & graphic novels",
+    bgColor: "bg-cyan-800",
+    span: "col-span-1 lg:col-span-1",
+    image: "https://i.imgur.com/NJlSG5o.jpeg",
   },
 ];
