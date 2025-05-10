@@ -87,7 +87,7 @@ export default function Projects() {
     >
       <div className="relative w-full max-w-7xl mx-auto">
         <motion.h1
-          className="text-6xl font-bold text-center mb-16"
+          className="text-5xl font-bold text-center mb-16"
           initial={{ opacity: 0, y: -20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
           transition={{ duration: 0.7, type: "spring", stiffness: 100 }}
