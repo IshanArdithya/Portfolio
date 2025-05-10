@@ -222,7 +222,7 @@ export const projects: Project[] = [
     category: "marketing",
     description:
       "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eos, tempora doloribus ab saepe illo quae repellendus omnis cum placeat cupiditate tenetur dolorem a quia fuga voluptate unde animi molestias incidunt sunt, dolore reiciendis nulla qui. Neque aperiam voluptatem nesciunt. Hic eveniet inventore illo maxime at quam laboriosam est quasi ducimus.",
-    image: "/images/projects/NextuneLK.png?height=300&width=400",
+    image: "/images/projects/NextuneLK.webp?height=300&width=400",
     technologies: ["next", "tailwind", "express", "typescript"],
     githubUrl: "https://github.com/IshanArdithya/NextuneLK",
     url: "https://www.nextunelk.com/",
@@ -267,7 +267,7 @@ export const projects: Project[] = [
     description:
       "tempora doloribus ab saepe illo quae repellendus omnis cum placeat cupiditate tenetur dolorem a quia fuga voluptate unde animi molestias incidunt sunt.",
     image: "",
-    technologies: ["next", "react", "tailwind"],
+    technologies: ["react", "tailwind"],
     githubUrl: "https://github.com/",
   },
 ];
@@ -280,7 +280,7 @@ export const interests: Interests[] = [
     description:
       "Since 2021, I've been exploring the world of programming. Starting with C, I quickly expanded to C++, C#, Java, Python, .NET, Kotlin, JavaScript, TypeScript, Bash, and SQL. Each language taught me something new, enhancing my ability to solve problems and create efficient software.",
     span: "col-span-1 lg:col-span-2",
-    image: "https://i.imgur.com/2DdpHIh.jpeg",
+    image: "/images/interests/programmer.webp",
   },
   {
     title: "DevOps",
@@ -289,7 +289,7 @@ export const interests: Interests[] = [
     description:
       "My journey with DevOps began with a simple goal—running a music bot on a VPS. Since then, I've dived into automating workflows, optimizing deployments, and bridging the gap between development and operations. I focus on scalable solutions, continuous integration, and seamless deployments.",
     span: "col-span-1 lg:col-span-1",
-    image: "https://i.imgur.com/3xwl3m0.jpeg",
+    image: "/images/interests/devops.webp",
   },
   {
     title: "Web Development",
@@ -298,7 +298,7 @@ export const interests: Interests[] = [
     description:
       "My web development journey started with PHP, but it quickly expanded to modern stacks. Today, I focus on Next.js projects, leveraging Express.js, Node.js, MongoDB, MySQL, Tailwind CSS, and C# to create scalable, user-friendly websites.",
     span: "col-span-1 lg:col-span-1",
-    image: "https://i.imgur.com/eHCroO1.jpeg",
+    image: "/images/interests/webdev.webp",
   },
   {
     title: "Music",
@@ -307,7 +307,7 @@ export const interests: Interests[] = [
     description:
       "Music has been a constant part of my life. I’ve always gravitated towards rock but enjoy exploring a wide range of genres—from iconic tracks to anime songs. Live shows and new discoveries keep my playlist fresh, fueling my creativity.",
     span: "col-span-1 lg:col-span-2",
-    image: "https://i.imgur.com/CwJDhzq.jpeg",
+    image: "/images/interests/music.webp",
   },
   {
     title: "Movies & Anime",
@@ -316,7 +316,7 @@ export const interests: Interests[] = [
     description:
       "While I may not watch movies often, anime has always been a source of inspiration. Beyond entertainment, it helps me relax, sparks creativity, and introduces me to incredible stories and perspectives. Steins;Gate remains one of my all-time favorites.",
     span: "col-span-1 lg:col-span-2",
-    image: "https://i.imgur.com/cDn1Asp.jpeg",
+    image: "/images/interests/moviesanime.webp",
   },
   {
     title: "Gaming",
@@ -325,6 +325,6 @@ export const interests: Interests[] = [
     description:
       "Gaming has been a passion since childhood, and in 2022, I took it to the next level with competitive play. In 2023, I competed in my first Valorant Inter-University tournament and won flawlessly. It's about teamwork and strategy.",
     span: "col-span-1",
-    image: "https://i.imgur.com/IqkGPYd.png",
+    image: "/images/interests/gaming.webp",
   },
 ];
