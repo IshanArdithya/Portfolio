@@ -6,6 +6,7 @@ import { useRef, useState } from "react";
 import { FaCopy, FaCheck } from "react-icons/fa";
 import { profile, socialLinks } from "./constants";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
+import { AnimatedCircleFooterGridPattern } from "@/components/home/GridPattern";
 import { IoIosSend } from "react-icons/io";
 
 export default function Contact() {
@@ -51,6 +52,9 @@ export default function Contact() {
       ref={sectionRef}
       className={`relative flex flex-col items-center justify-center px-6 py-20 overflow-hidden`}
     >
+      <div className="absolute inset-0 w-full h-full z-1 opacity-30">
+        <AnimatedCircleFooterGridPattern />
+      </div>
       <div className="relative w-full max-w-7xl mx-auto z-10">
         <motion.h1
           className="text-5xl font-bold text-center mb-10"
@@ -68,7 +72,7 @@ export default function Contact() {
           animate={isInView ? "visible" : "hidden"}
         >
           {/* contact card */}
-          <motion.div variants={itemVariants} className="w-full max-w-2xl">
+          <motion.div variants={itemVariants} className="w-full max-w-5xl">
             <p className={`text-center mb-12 ${theme.textMuted}`}>
               I&apos;m always open to discussing new projects, creative ideas or
               opportunities to be part of your vision.
@@ -151,9 +155,14 @@ export default function Contact() {
                         containerClassName="rounded-full"
                         className={`flex items-center justify-center p-3 rounded-full w-10 h-10 group ${theme.cardBackground} transition-all duration-300`}
                       >
-                        <Icon
-                          className={`text-xl ${theme.text} ${theme.groupHoverText} transition-all duration-300`}
-                        />
+                        <motion.div
+                          whileHover={{ scale: 1.2, rotate: 5 }}
+                          className="text-xl"
+                        >
+                          <Icon
+                            className={`${theme.text} ${theme.groupHoverText} transition-all duration-300`}
+                          />
+                        </motion.div>
                       </HoverBorderGradient>
                     </a>
                   </motion.div>
