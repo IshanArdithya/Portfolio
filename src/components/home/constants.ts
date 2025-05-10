@@ -305,7 +305,7 @@ export const interests: Interests[] = [
     subtitle: "From classics to modern",
     semititle: "Sounds That Inspire",
     description:
-      "Music has been a constant part of my life. One of my favorite bands is Linkin Park, but I enjoy a wide range of genres—from iconic tracks to anime songs. Live shows and new discoveries keep my playlist fresh, fueling my creativity.",
+      "Music has been a constant part of my life. I’ve always gravitated towards rock but enjoy exploring a wide range of genres—from iconic tracks to anime songs. Live shows and new discoveries keep my playlist fresh, fueling my creativity.",
     span: "col-span-1 lg:col-span-2",
     image: "https://i.imgur.com/CwJDhzq.jpeg",
   },
