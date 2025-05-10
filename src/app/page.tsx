@@ -6,6 +6,7 @@ import Header from "@/components/common/Header";
 import Experience from "@/components/home/Experience";
 import Projects from "@/components/home/Projects";
 import Personal from "@/components/home/Personal";
+import Contact from "@/components/home/Contact";
 
 export default function Home() {
   const { theme } = useTheme();
@@ -18,6 +19,7 @@ export default function Home() {
         <Experience />
         <Projects />
         <Personal />
+        <Contact />
       </div>
     </>
   );
