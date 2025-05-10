@@ -37,7 +37,7 @@ export const WobbleCard = ({
         transition: "transform 0.1s ease-out",
       }}
       className={cn(
-        "mx-auto w-full bg-indigo-800  relative rounded-2xl overflow-hidden",
+        "mx-auto w-full relative rounded-2xl overflow-hidden",
         containerClassName
       )}
     >
@@ -57,7 +57,7 @@ export const WobbleCard = ({
           }}
           className={cn("h-full px-4 py-20 sm:px-10", className)}
         >
-          <Noise />
+          <Noise isHovering={isHovering} />
           {children}
         </motion.div>
       </div>
@@ -65,13 +65,14 @@ export const WobbleCard = ({
   );
 };
 
-const Noise = () => {
+const Noise = ({ isHovering }: { isHovering: boolean }) => {
   return (
     <div
-      className="absolute inset-0 w-full h-full scale-[1.2] transform opacity-10 [mask-image:radial-gradient(#fff,transparent,75%)]"
+      className="absolute inset-0 w-full h-full scale-[1.2] transform [mask-image:radial-gradient(#fff,transparent,75%)]"
       style={{
         backgroundImage: "url(/noise.webp)",
         backgroundSize: "30%",
+        opacity: isHovering ? 0.06 : 0.1,
       }}
     ></div>
   );
