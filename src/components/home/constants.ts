@@ -1,75 +1,21 @@
 import {
+  Experience,
+  Interests,
+  NavBar,
+  Profile,
+  Project,
+  SocialLink,
+  Statistic,
+  Tags,
+  TechIcons,
+} from "@/types";
+import {
   FaLinkedin,
   FaGithub,
   FaFacebook,
   FaInstagram,
   FaDiscord,
 } from "react-icons/fa";
-
-export type NavBar = {
-  text: string;
-  href: string;
-};
-
-export type Profile = {
-  name: string;
-  role: string;
-  description: string;
-  image: string;
-};
-
-export type Tags = string[];
-
-export type Statistic = {
-  value: number;
-  label: string;
-};
-
-export type SocialLink = {
-  name: string;
-  url: string;
-  icon: React.ElementType;
-};
-
-export type Experience = {
-  startDate: string;
-  endDate: string;
-  title: string;
-  company: string;
-  companylogo: string;
-  description: string;
-  links?: {
-    url: string;
-    type: "linkedin" | "website";
-  }[];
-  tech?: string[];
-};
-
-export type TechIcons = {
-  [key: string]: {
-    image: string;
-    name: string;
-    description: string;
-  };
-};
-
-export type Project = {
-  name: string;
-  category: string;
-  description: string;
-  image: string;
-  technologies: string[];
-  githubUrl?: string;
-  url?: string;
-};
-
-export type Interests = {
-  title: string;
-  subtitle: string;
-  bgColor: string;
-  span: string;
-  image: string;
-};
 
 export const navBar: NavBar[] = [
   {
@@ -330,36 +276,55 @@ export const interests: Interests[] = [
   {
     title: "Programmer",
     subtitle: "Coding my way through tech",
-    bgColor: "bg-indigo-800",
+    semititle: "A Journey Through Languages",
+    description:
+      "Since 2021, I've been exploring the world of programming. Starting with C, I quickly expanded to C++, C#, Java, Python, .NET, Kotlin, JavaScript, TypeScript, Bash, and SQL. Each language taught me something new, enhancing my ability to solve problems and create efficient software.",
     span: "col-span-1 lg:col-span-2",
     image: "https://i.imgur.com/2DdpHIh.jpeg",
   },
   {
+    title: "DevOps",
+    subtitle: "Automating, scaling, and optimizing systems",
+    semititle: "From a Music Bot to Scalable Systems",
+    description:
+      "My journey with DevOps began with a simple goal—running a music bot on a VPS. Since then, I've dived into automating workflows, optimizing deployments, and bridging the gap between development and operations. I focus on scalable solutions, continuous integration, and seamless deployments.",
+    span: "col-span-1 lg:col-span-1",
+    image: "https://i.imgur.com/3xwl3m0.jpeg",
+  },
+  {
+    title: "Web Development",
+    subtitle: "Building responsive, user-friendly websites",
+    semititle: "From PHP to Modern JavaScript Frameworks",
+    description:
+      "My web development journey started with PHP, but it quickly expanded to modern stacks. Today, I focus on Next.js projects, leveraging Express.js, Node.js, MongoDB, MySQL, Tailwind CSS, and C# to create scalable, user-friendly websites.",
+    span: "col-span-1 lg:col-span-1",
+    image: "https://i.imgur.com/eHCroO1.jpeg",
+  },
+  {
     title: "Music",
     subtitle: "From classics to modern",
-    bgColor: "bg-emerald-800",
-    span: "col-span-1",
+    semititle: "Sounds That Inspire",
+    description:
+      "Music has been a constant part of my life. One of my favorite bands is Linkin Park, but I enjoy a wide range of genres—from iconic tracks to anime songs. Live shows and new discoveries keep my playlist fresh, fueling my creativity.",
+    span: "col-span-1 lg:col-span-2",
     image: "https://i.imgur.com/CwJDhzq.jpeg",
+  },
+  {
+    title: "Movies & Anime",
+    subtitle: "Where Creativity Meets Narrative",
+    semititle: "Stories That Inspire and Resonate",
+    description:
+      "While I may not watch movies often, anime has always been a source of inspiration. Beyond entertainment, it helps me relax, sparks creativity, and introduces me to incredible stories and perspectives. Steins;Gate remains one of my all-time favorites.",
+    span: "col-span-1 lg:col-span-2",
+    image: "https://i.imgur.com/cDn1Asp.jpeg",
   },
   {
     title: "Gaming",
     subtitle: "Competitive Gamer",
-    bgColor: "bg-amber-700",
+    semititle: "Beyond Casual Play",
+    description:
+      "Gaming has been a passion since childhood, and in 2022, I took it to the next level with competitive play. In 2023, I competed in my first Valorant Inter-University tournament and won flawlessly. It's about teamwork and strategy.",
     span: "col-span-1",
     image: "https://i.imgur.com/IqkGPYd.png",
-  },
-  {
-    title: "Movies & Anime",
-    subtitle: "From films to anime, a visual journey",
-    bgColor: "bg-rose-800",
-    span: "col-span-1 lg:col-span-2",
-    image: "https://i.imgur.com/T4TgmlR.png",
-  },
-  {
-    title: "Books",
-    subtitle: "Manga stories & graphic novels",
-    bgColor: "bg-cyan-800",
-    span: "col-span-1 lg:col-span-1",
-    image: "https://i.imgur.com/NJlSG5o.jpeg",
   },
 ];
