@@ -147,6 +147,10 @@
     @apply bg-background text-foreground;
     font-family: "Inter", "Quicksand", sans-serif;
   }
+  ::selection {
+    background-color: rgba(99, 102, 241, 0.6);
+    color: #ffffff;
+  }
 }
 
 @utility shadow-zero {
