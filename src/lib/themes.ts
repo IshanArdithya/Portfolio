@@ -35,6 +35,9 @@ export interface Theme {
   cardBorder: string;
   cardHoverBorder: string;
 
+  exCardBackground: string;
+  exCardSecondaryBackground: string;
+
   navBackground: string;
   navText: string;
   navTextHover: string;
@@ -52,7 +55,7 @@ export const themes: Record<ThemeKey, Theme> = {
     neutral: "slate-800",
 
     // background
-    background: "bg-[rgb(28,28,34)]/100",
+    background: "bg-[rgb(28,28,34)]/100", // bg-[#121212]
     backgroundAlt: "bg-slate-800",
     backgroundAccent: "bg-indigo-500",
 
@@ -83,6 +86,10 @@ export const themes: Record<ThemeKey, Theme> = {
     cardBackground: "bg-[rgb(22,22,29)]/30",
     cardBorder: "border-slate-700",
     cardHoverBorder: "hover:border-indigo-400",
+
+    // expandable card
+    exCardBackground: "bg-[#121212]",
+    exCardSecondaryBackground: "bg-[#1e1e1e]",
 
     navBackground: "bg-slate-900",
     navText: "text-white/80",
