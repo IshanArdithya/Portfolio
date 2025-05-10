@@ -7,6 +7,7 @@ export type NavBar = {
 
 export type Profile = {
   name: string;
+  email: string;
   role: string;
   description: string;
   image: string;
