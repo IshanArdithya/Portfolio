@@ -89,22 +89,6 @@ const FloatingImage = ({ src, alt }: { src: string; alt: string }) => {
       style={{ y }}
       className="relative"
     >
-      {/* <motion.div
-        className="absolute -inset-2 rounded-3xl blur-xl transition duration-500"
-        animate={{
-          background: [
-            "rgba(120, 119, 198, 0.3)",
-            "rgba(74, 86, 226, 0.3)",
-            "rgba(110, 72, 170, 0.3)",
-            "rgba(120, 119, 198, 0.3)",
-          ],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Number.POSITIVE_INFINITY,
-          repeatType: "reverse",
-        }}
-      /> */}
       <Image
         src={src || "/placeholder.svg"}
         alt={alt}
