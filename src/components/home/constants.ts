@@ -42,6 +42,7 @@ export const navBar: NavBar[] = [
 
 export const profile: Profile = {
   name: "Ishan Ardithya",
+  email: "ishanardithya@gmail.com",
   role: "Software Engineer",
   description:
     "I am a full-stack developer specializing in modern front-end frameworks like React and Next.js, and back-end technologies such as Node.js, Express.js, MongoDB, and MySQL.",
@@ -98,8 +99,8 @@ export const socialLinks: SocialLink[] = [
     icon: FaInstagram,
   },
   {
-    name: "Instagram",
-    url: "https://discord.com",
+    name: "Discord",
+    url: "https://discord.com/users/365863757735395328",
     icon: FaDiscord,
   },
 ];
