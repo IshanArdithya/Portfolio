@@ -94,6 +94,7 @@ const FloatingImage = ({ src, alt }: { src: string; alt: string }) => {
         alt={alt}
         width={600}
         height={600}
+        unoptimized // added because the image is a gif
         className="w-full max-w-sm rounded-full shadow-2xl object-cover"
       />
     </motion.div>

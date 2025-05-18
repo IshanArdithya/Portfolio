@@ -28,7 +28,7 @@ export default function Header() {
   }));
 
   return (
-    <Navbar className="fixed top-0 md:top-6 left-0 w-full text-lg font-semibold p-4 z-10 transition-all">
+    <Navbar className="fixed top-0 md:top-3 left-0 w-full text-lg font-semibold p-4 z-10 transition-all">
       <NavBody className="min-h-[70px] py-4">
         {/* <NavbarLogo /> */}
         <NavItems items={navItems} />

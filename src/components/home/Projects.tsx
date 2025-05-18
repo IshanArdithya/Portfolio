@@ -19,7 +19,7 @@ const ExternalLinkButton = ({ url, text }: { url: string; text: string }) => {
       className={`inline-flex items-center text-sm font-medium uppercase ${theme.textAccent} ${theme.hoverText} transition-all duration-75 group relative`}
       ref={ref}
     >
-      <span className="relative z-10">{text}</span>
+      <span className="relative z-5">{text}</span>
       <motion.div
         className="absolute bottom-0 left-0 h-[2px] bg-current"
         initial={{ width: 0 }}
