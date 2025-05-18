@@ -91,7 +91,7 @@ export const themes: Record<ThemeKey, Theme> = {
     exCardBackground: "bg-[#121212]",
     exCardSecondaryBackground: "bg-[#1e1e1e]",
 
-    navBackground: "bg-slate-900",
+    navBackground: "bg-[rgb(28,28,34)]/100",
     navText: "text-white/80",
     navTextHover: "hover:text-indigo-400",
 
