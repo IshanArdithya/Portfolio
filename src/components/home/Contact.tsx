@@ -17,9 +17,56 @@ export default function Contact() {
   const [isHovered, setIsHovered] = useState(false);
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(profile.email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 5000);
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard
+        .writeText(profile.email)
+        .then(() => {
+          setCopied(true);
+          setTimeout(() => setCopied(false), 5000);
+        })
+        .catch(() => {
+          fallbackCopyTextToClipboard(profile.email);
+        });
+    } else {
+      fallbackCopyTextToClipboard(profile.email);
+    }
+  };
+
+  const fallbackCopyTextToClipboard = (text: string) => {
+    // Create a temporary textarea to copy text on older browsers
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+
+    // Avoid scrolling to bottom
+    textArea.style.position = "fixed";
+    textArea.style.top = "0";
+    textArea.style.left = "0";
+    textArea.style.width = "2em";
+    textArea.style.height = "2em";
+    textArea.style.padding = "0";
+    textArea.style.border = "none";
+    textArea.style.outline = "none";
+    textArea.style.boxShadow = "none";
+    textArea.style.background = "transparent";
+
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+
+    try {
+      const successful = document.execCommand("copy");
+      if (successful) {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 5000);
+      } else {
+        alert("Failed to copy email.");
+      }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (err) {
+      alert("Failed to copy email.");
+    }
+
+    document.body.removeChild(textArea);
   };
 
   const containerVariants = {
