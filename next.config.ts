@@ -5,12 +5,11 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "i.imgur.com",
+        hostname: "api.microlink.io",
         port: "",
         pathname: "/**",
       },
     ],
-    domains: ["api.microlink.io"],
   },
 };
 
