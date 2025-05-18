@@ -149,7 +149,7 @@ export default function Hero() {
         ref={sectionRef}
         className={`relative min-h-screen flex flex-col items-center justify-between px-6 pt-20 pb-10 overflow-hidden`}
       >
-        <div className="relative w-full pt-20 flex flex-col items-center justify-center max-w-7xl">
+        <div className="relative w-full pt-10 md:pt-20 flex flex-col items-center justify-center max-w-7xl">
           <div className="absolute inset-0 w-full h-full z-1 opacity-30">
             <AnimatedCircleGridPattern />
           </div>
@@ -164,7 +164,7 @@ export default function Hero() {
               animate={isInView ? "visible" : "hidden"}
             >
               <motion.h1
-                className="text-6xl font-bold leading-tight tracking-tight"
+                className="text-5xl md:text-6xl font-bold leading-tight tracking-tight"
                 variants={itemVariants}
               >
                 {profile.name}
@@ -185,7 +185,7 @@ export default function Hero() {
               </motion.p>
 
               {/* tags */}
-              <motion.div variants={itemVariants}>
+              <motion.div className="px-3 md:px-0" variants={itemVariants}>
                 <Marquee
                   pauseOnHover={true}
                   speed={40}
