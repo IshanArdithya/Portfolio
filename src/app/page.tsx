@@ -15,11 +15,21 @@ export default function Home() {
     <>
       <div className={`${theme.background} ${theme.text}`}>
         <Header />
-        <Hero />
-        <Experience />
-        <Projects />
-        <Personal />
-        <Contact />
+        <div id="home">
+          <Hero />
+        </div>
+        <div id="experience">
+          <Experience />
+        </div>
+        <div id="projects">
+          <Projects />
+        </div>
+        <div id="personal">
+          <Personal />
+        </div>
+        <div id="contact">
+          <Contact />
+        </div>
       </div>
     </>
   );

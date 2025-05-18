@@ -26,9 +26,10 @@ interface NavItemsProps {
   items: {
     name: string;
     link: string;
+    active?: boolean;
   }[];
   className?: string;
-  onItemClick?: () => void;
+  onItemClick?: (e: React.MouseEvent<HTMLAnchorElement>, href: string) => void;
 }
 
 interface MobileNavProps {
@@ -135,21 +136,29 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
       {items.map((item, idx) => (
         <Link
           onMouseEnter={() => setHovered(idx)}
-          onClick={onItemClick}
-          className={cn("relative px-4 py-2 group", theme.text)}
+          onClick={(e) => (onItemClick ? onItemClick(e, item.link) : undefined)}
+          className={cn(
+            "relative px-4 py-2 group",
+            item.active ? theme.textAccent : theme.text
+          )}
           key={`link-${idx}`}
           href={item.link}
         >
-          {hovered === idx && (
+          {(hovered === idx || item.active) && (
             <motion.div
               layoutId="hovered"
               className={cn(
                 "absolute inset-0 h-full w-full rounded-full",
-                "bg-neutral-800"
+                item.active ? "bg-neutral-800/80" : "bg-neutral-800"
               )}
             />
           )}
-          <span className={cn("relative z-20", theme.groupHoverText)}>
+          <span
+            className={cn(
+              "relative z-20",
+              item.active ? theme.textAccent : theme.groupHoverText
+            )}
+          >
             {item.name}
           </span>
         </Link>
