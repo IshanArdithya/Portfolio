@@ -103,7 +103,7 @@ const FloatingImage = ({ src, alt }: { src: string; alt: string }) => {
 export default function Hero() {
   const { theme } = useTheme();
   const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
+  const isInView = useInView(sectionRef, { once: false, amount: 0.1 });
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -158,7 +158,7 @@ export default function Hero() {
           <div className="relative grid grid-cols-1 md:grid-cols-2 items-center gap-10 w-full xl:pb-24 z-2">
             {/* left section */}
             <motion.div
-              className="text-center md:text-left"
+              className="text-center md:text-left order-2 md:order-1"
               variants={containerVariants}
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
@@ -178,7 +178,7 @@ export default function Hero() {
               </motion.h3>
 
               <motion.p
-                className={`opacity-90 ${theme.textMuted} max-w-lg text-base md:text-lg leading-relaxed mb-6`}
+                className={`opacity-90 ${theme.textMuted} max-w-lg mx-auto md:mx-0 text-base md:text-lg leading-relaxed mb-6`}
                 variants={itemVariants}
               >
                 {profile.description}
@@ -189,7 +189,7 @@ export default function Hero() {
                 <Marquee
                   pauseOnHover={true}
                   speed={40}
-                  className="max-w-md mb-5"
+                  className="max-w-md mb-5 mx-auto md:mx-0"
                 >
                   <div className="flex flex-wrap mb-8 mt-1">
                     {tags.map((tag, index) => (
@@ -223,7 +223,7 @@ export default function Hero() {
             </motion.div>
 
             {/* right section */}
-            <div className="flex justify-center relative">
+            <div className="flex justify-center relative order-1 md:order-2">
               <FloatingImage src={profile.image} alt="Profile Photo" />
             </div>
           </div>
@@ -265,7 +265,7 @@ export default function Hero() {
 
         {/* social links section */}
         <motion.section
-          className="w-full max-w-7xl"
+          className="w-full max-w-7xl mt-10 md:mt-0"
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.5, delay: 0.8 }}
@@ -276,7 +276,7 @@ export default function Hero() {
               className={`flex-grow border-t ${theme.border}`}
               initial={{ scaleX: 0 }}
               animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
-              transition={{ duration: 0.8, delay: 0.9 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
               style={{ originX: 1 }}
             ></motion.div>
 
@@ -310,7 +310,7 @@ export default function Hero() {
               className={`flex-grow border-t ${theme.border}`}
               initial={{ scaleX: 0 }}
               animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
-              transition={{ duration: 0.8, delay: 0.9 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
               style={{ originX: 0 }}
             ></motion.div>
           </div>
