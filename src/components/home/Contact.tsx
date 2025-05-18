@@ -151,19 +151,30 @@ export default function Contact() {
                       rel="noopener noreferrer"
                       className="block"
                     >
-                      <HoverBorderGradient
-                        containerClassName="rounded-full"
-                        className={`flex items-center justify-center p-3 rounded-full w-10 h-10 group ${theme.cardBackground} transition-all duration-300`}
+                      <motion.div
+                        whileHover="hovered"
+                        initial="rest"
+                        animate="rest"
+                        className="group"
                       >
-                        <motion.div
-                          whileHover={{ scale: 1.2, rotate: 5 }}
-                          className="text-xl"
+                        <HoverBorderGradient
+                          containerClassName="rounded-full"
+                          className={`flex items-center justify-center p-3 rounded-full w-10 h-10 ${theme.cardBackground} transition-all duration-300`}
                         >
-                          <Icon
-                            className={`${theme.text} ${theme.groupHoverText} transition-all duration-300`}
-                          />
-                        </motion.div>
-                      </HoverBorderGradient>
+                          <motion.div
+                            variants={{
+                              rest: { scale: 1, rotate: 0 },
+                              hovered: { scale: 1.2, rotate: 5 },
+                            }}
+                            className="text-xl"
+                            transition={{ duration: 0.3 }}
+                          >
+                            <Icon
+                              className={`${theme.text} ${theme.groupHoverText} transition-all duration-300`}
+                            />
+                          </motion.div>
+                        </HoverBorderGradient>
+                      </motion.div>
                     </a>
                   </motion.div>
                 );
