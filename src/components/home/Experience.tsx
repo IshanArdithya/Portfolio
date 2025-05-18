@@ -50,7 +50,7 @@ export default function Experience() {
                   className={`absolute inset-0 bg-gradient-to-r ${theme.gradientFrom} ${theme.gradientTo} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
                 ></div>
 
-                <div className="flex flex-col md:flex-row gap-8 relative z-10">
+                <div className="flex flex-col md:flex-row gap-5 md:gap-8 relative z-10">
                   <div className="flex-shrink-0 flex items-start justify-center md:justify-start">
                     <div className="relative">
                       <div
@@ -72,13 +72,13 @@ export default function Experience() {
                   <div className="flex-1 space-y-4">
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                       <span
-                        className={`text-sm font-medium px-3 py-1 rounded-full inline-flex items-center ${theme.backgroundAccent} bg-opacity-20 w-fit`}
+                        className={`mx-auto md:mx-0 text-sm font-medium px-3 py-1 rounded-full inline-flex items-center ${theme.backgroundAccent} bg-opacity-20 w-fit`}
                       >
                         {exp.startDate} — {exp.endDate}
                       </span>
 
                       {exp.links && exp.links.length > 0 && (
-                        <div className="flex items-center gap-3">
+                        <div className="hidden sm:flex items-center gap-3">
                           {exp.links.map((link, i) => {
                             const Icon =
                               link.type === "linkedin" ? FaLinkedin : FaGlobe;
@@ -118,6 +118,36 @@ export default function Experience() {
                         <h4 className="text-xl font-medium opacity-90">
                           {exp.company}
                         </h4>
+
+                        {exp.links && exp.links.length > 0 && (
+                          <div className="flex sm:hidden items-center gap-2">
+                            {exp.links.map((link, i) => {
+                              const Icon =
+                                link.type === "linkedin" ? FaLinkedin : FaGlobe;
+                              return (
+                                <motion.div
+                                  key={i}
+                                  whileHover={{ scale: 1.2 }}
+                                  whileTap={{ scale: 0.9 }}
+                                >
+                                  <Link
+                                    href={link.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className={`${theme.hoverText} flex items-center justify-center w-7 h-7 rounded-full bg-gray-800 transition-colors duration-200`}
+                                    aria-label={
+                                      link.type === "linkedin"
+                                        ? "LinkedIn profile"
+                                        : "Website"
+                                    }
+                                  >
+                                    <Icon className="text-sm" />
+                                  </Link>
+                                </motion.div>
+                              );
+                            })}
+                          </div>
+                        )}
                       </div>
                       <p
                         className={`${theme.textMuted} text-base leading-relaxed`}
