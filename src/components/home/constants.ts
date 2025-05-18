@@ -111,7 +111,7 @@ export const experiences: Experience[] = [
     endDate: "Present",
     title: "Software Engineer Intern",
     company: "Enored",
-    companylogo: "https://i.imgur.com/ssfQKfJ.jpeg",
+    companylogo: "/images/experiences/enoredtech_logo.jpeg",
     description:
       "Lorem ipsum dolor sit amet consectetur, adipisicing elit.Perspiciatis reprehenderit maxime distinctio assumenda optionemo repudiandae nulla esse tempore, quibusdam aspernatur quas aliquid molestias aut repellendus libero voluptatibus non consequatur sapiente delectus vero eveniet quod. Similique non, ratione quam doloremque voluptas magni praesentium ad aspernatur? Sit rerum, sapiente dolore ducimus, reiciendis, quia eaque tempora exercitationem molestias voluptas tempore accusamus maxime.",
     links: [
@@ -233,9 +233,18 @@ export const projects: Project[] = [
     category: "transport",
     description:
       "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eos, tempora doloribus ab saepe illo quae repellendus omnis cum placeat cupiditate tenetur dolorem a quia fuga voluptate unde animi molestias incidunt sunt, dolore reiciendis nulla qui. Neque aperiam voluptatem nesciunt. Hic eveniet inventore illo maxime at quam laboriosam est quasi ducimus.",
-    image: "",
+    image: "/images/projects/MegaCityCab.webp?height=300&width=400",
     technologies: ["html", "css", "javascript", "java", "mysql"],
     githubUrl: "https://github.com/IshanArdithya/MegaCityCab",
+  },
+  {
+    name: "WebForge",
+    category: "marketing",
+    description:
+      "tempora doloribus ab saepe illo quae repellendus omnis cum placeat cupiditate tenetur dolorem a quia fuga voluptate unde animi molestias incidunt sunt.",
+    image: "/images/projects/WebForge.webp?height=300&width=400",
+    technologies: ["react", "tailwind"],
+    githubUrl: "https://github.com/IshanArdithya/WebForge",
   },
   {
     name: "MY ADMIN",
@@ -261,15 +270,6 @@ export const projects: Project[] = [
       "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eos, tempora doloribus ab saepe illo quae repellendus omnis cum placeat cupiditate tenetur dolorem a quia fuga voluptate unde animi molestias incidunt sunt, dolore reiciendis nulla qui. Neque aperiam voluptatem nesciunt. Hic eveniet inventore illo maxime at quam laboriosam est quasi ducimus.",
     image: "",
     technologies: ["next", "firebase"],
-  },
-  {
-    name: "WebForge",
-    category: "marketing",
-    description:
-      "tempora doloribus ab saepe illo quae repellendus omnis cum placeat cupiditate tenetur dolorem a quia fuga voluptate unde animi molestias incidunt sunt.",
-    image: "",
-    technologies: ["react", "tailwind"],
-    githubUrl: "https://github.com/",
   },
 ];
 
