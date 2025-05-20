@@ -238,27 +238,34 @@ export default function Hero() {
           >
             <div className="mx-auto w-full gap-4">
               <div className="flex flex-wrap items-center align-middle justify-between w-full gap-6">
-                {statistics.map((stat, index) => (
-                  <motion.div
-                    key={index}
-                    className="flex items-center gap-4"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={
-                      isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
-                    }
-                    transition={{ duration: 0.5, delay: 0.7 + index * 0.1 }}
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    <span className="text-4xl xl:text-6xl font-extrabold">
-                      <AnimatedCounter value={stat.value} />
-                    </span>
-                    <p
-                      className={`max-w-[100px] mr-5 leading-snug tracking-wide ${theme.textMuted}`}
+                {statistics.map((stat, index) => {
+                  const currentYear = new Date().getFullYear();
+                  const displayValue =
+                    stat.birthYear !== undefined
+                      ? currentYear - stat.birthYear
+                      : stat.value ?? 0;
+                  return (
+                    <motion.div
+                      key={index}
+                      className="flex items-center gap-4"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={
+                        isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
+                      }
+                      transition={{ duration: 0.5, delay: 0.7 + index * 0.1 }}
+                      whileHover={{ scale: 1.05 }}
                     >
-                      {stat.label}
-                    </p>
-                  </motion.div>
-                ))}
+                      <span className="text-4xl xl:text-6xl font-extrabold">
+                        <AnimatedCounter value={displayValue} />
+                      </span>
+                      <p
+                        className={`max-w-[100px] mr-5 leading-snug tracking-wide ${theme.textMuted}`}
+                      >
+                        {stat.label}
+                      </p>
+                    </motion.div>
+                  );
+                })}
               </div>
             </div>
           </motion.section>

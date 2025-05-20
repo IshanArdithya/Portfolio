@@ -16,8 +16,9 @@ export type Profile = {
 export type Tags = string[];
 
 export type Statistic = {
-  value: number;
+  value?: number;
   label: string;
+  birthYear?: number;
 };
 
 export type SocialLink = {

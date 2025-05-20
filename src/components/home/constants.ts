@@ -60,15 +60,15 @@ export const tags: Tags = [
 
 export const statistics: Statistic[] = [
   {
-    value: 23,
     label: "Age",
+    birthYear: 2002,
   },
   {
     value: 3,
     label: "Years of experience",
   },
   {
-    value: 10,
+    value: 11,
     label: "Projects worked on",
   },
   {
@@ -222,54 +222,47 @@ export const projects: Project[] = [
     name: "NextuneLK",
     category: "marketing",
     description:
-      "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eos, tempora doloribus ab saepe illo quae repellendus omnis cum placeat cupiditate tenetur dolorem a quia fuga voluptate unde animi molestias incidunt sunt, dolore reiciendis nulla qui. Neque aperiam voluptatem nesciunt. Hic eveniet inventore illo maxime at quam laboriosam est quasi ducimus.",
+      "A website to check data usage, view server stats, see available plans, and follow a step-by-step setup guide.",
     image: "/images/projects/NextuneLK.webp?height=300&width=400",
     technologies: ["next", "tailwind", "express", "typescript"],
     githubUrl: "https://github.com/IshanArdithya/NextuneLK",
     url: "https://www.nextunelk.com/",
   },
   {
-    name: "Mega City Cab",
-    category: "transport",
-    description:
-      "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eos, tempora doloribus ab saepe illo quae repellendus omnis cum placeat cupiditate tenetur dolorem a quia fuga voluptate unde animi molestias incidunt sunt, dolore reiciendis nulla qui. Neque aperiam voluptatem nesciunt. Hic eveniet inventore illo maxime at quam laboriosam est quasi ducimus.",
-    image: "/images/projects/MegaCityCab.webp?height=300&width=400",
-    technologies: ["html", "css", "javascript", "java", "mysql"],
-    githubUrl: "https://github.com/IshanArdithya/MegaCityCab",
-  },
-  {
     name: "WebForge",
     category: "marketing",
     description:
-      "tempora doloribus ab saepe illo quae repellendus omnis cum placeat cupiditate tenetur dolorem a quia fuga voluptate unde animi molestias incidunt sunt.",
+      "A single-page website UI for a build and web hosting service, showcasing plans, features, and contact options.",
     image: "/images/projects/WebForge.webp?height=300&width=400",
     technologies: ["react", "tailwind"],
     githubUrl: "https://github.com/IshanArdithya/WebForge",
   },
   {
-    name: "MY ADMIN",
-    category: "administration",
+    name: "Explore Sri Lanka",
+    category: "tourism",
     description:
-      "tempora doloribus ab saepe illo quae repellendus omnis cum placeat cupiditate tenetur dolorem a quia fuga voluptate unde animi.",
-    image: "",
-    technologies: ["next", "firebase"],
+      "A tourism website with tour packages, hotel bookings, tour guide hiring, and destination insights for travelers exploring Sri Lanka.",
+    image: "/images/projects/ExploreSriLanka.webp?height=300&width=400",
+    technologies: ["html", "css", "javascript", "node", "php", "mysql"],
+    githubUrl: "https://github.com/IshanArdithya/ExploreSriLanka",
   },
   {
-    name: "Test",
-    category: "construction",
+    name: "Mega City Cab",
+    category: "transport",
     description:
-      "tempora doloribus ab saepe illo quae repellendus omnis cum placeat cupiditate tenetur dolorem a quia fuga voluptate unde animi molestias incidunt sunt, dolore reiciendis nulla qui.",
-    image: "",
-    technologies: ["html", "css", "tailwind"],
-    url: "#",
+      "A cab booking web app offering ride-hailing services with a clean interface, booking features, and a seamless user experience.",
+    image: "/images/projects/MegaCityCab.webp?height=300&width=400",
+    technologies: ["html", "css", "javascript", "java", "mysql"],
+    githubUrl: "https://github.com/IshanArdithya/MegaCityCab",
   },
   {
-    name: "TS",
-    category: "insurance",
+    name: "The Outer Clove",
+    category: "restaurant",
     description:
-      "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eos, tempora doloribus ab saepe illo quae repellendus omnis cum placeat cupiditate tenetur dolorem a quia fuga voluptate unde animi molestias incidunt sunt, dolore reiciendis nulla qui. Neque aperiam voluptatem nesciunt. Hic eveniet inventore illo maxime at quam laboriosam est quasi ducimus.",
-    image: "",
-    technologies: ["next", "firebase"],
+      "A dynamic restaurant website with a menu, online orders, table reservations, and a smooth checkout experience.",
+    image: "/images/projects/TheOuterClove.webp?height=300&width=400",
+    technologies: ["html", "css", "javascript", "php", "mysql"],
+    githubUrl: "https://github.com/IshanArdithya/TheOuterClove",
   },
 ];
 
@@ -279,7 +272,7 @@ export const interests: Interests[] = [
     subtitle: "Coding my way through tech",
     semititle: "A Journey Through Languages",
     description:
-      "Since 2021, I've been exploring the world of programming. Starting with C, I quickly expanded to C++, C#, Java, Python, .NET, Kotlin, JavaScript, TypeScript, Bash, and SQL. Each language taught me something new, enhancing my ability to solve problems and create efficient software.",
+      "I started learning programming back in 2021 with C, then moved on to C++, C#, and Java. After that, I got into web development and learned JavaScript, SQL, and .NET.\n\nAt one point, I wanted to build a Discord music bot, so I picked up Python and created a YouTube music bot for Discord. To keep it running 24/7, I learned Bash and hosted it on a Ubuntu VPS.\n\nLater, I built my first mobile app using Kotlin. In 2024, I started learning React and then moved into TypeScript, which I really enjoy using to build more structured and scalable apps. Every language I’ve learned has helped me grow and made coding even more fun.",
     span: "col-span-1 lg:col-span-2",
     image: "/images/interests/programmer.webp",
   },
@@ -295,9 +288,9 @@ export const interests: Interests[] = [
   {
     title: "Web Development",
     subtitle: "Building responsive, user-friendly websites",
-    semititle: "From PHP to Modern JavaScript Frameworks",
+    semititle: "From PHP to Modern Frameworks",
     description:
-      "My web development journey started with PHP, but it quickly expanded to modern stacks. Today, I focus on Next.js projects, leveraging Express.js, Node.js, MongoDB, MySQL, Tailwind CSS, and C# to create scalable, user-friendly websites.",
+      "I got into web development in 2021, starting with HTML, CSS, and JavaScript for the frontend. Then I learned backend development with PHP and MySQL. Over time, I built projects using other backends like Java, C#, and Node.js, and worked with databases like MS SQL Server and SQLite.\n\nIn 2024, I started learning React and really liked how it made building UIs easier. After that, I got into Tailwind CSS, Express.js, and MongoDB, which helped me create more modern, full-stack apps. Eventually, I started working with Next.js, and it’s now my go-to framework for building fast, scalable websites.",
     span: "col-span-1 lg:col-span-1",
     image: "/images/interests/webdev.webp",
   },
