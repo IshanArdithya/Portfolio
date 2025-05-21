@@ -19,7 +19,7 @@ const ButtonOne = ({
   return (
     <Link href={link} passHref>
       <button
-        className={`${theme.textAccent} ${theme.borderAccent} text-sm font-semibold px-8 py-4 border-2 w-full uppercase rounded-full ${theme.hoverTextAccent} ${theme.hoverBackgroundAccent} transition-all duration-150`}
+        className={`${theme.textAccent} ${theme.borderAccent} cursor-pointer text-sm font-semibold px-8 py-4 border-2 w-full uppercase rounded-full ${theme.hoverTextAccent} ${theme.hoverBackgroundAccent} transition-all duration-150`}
         onClick={onClick}
       >
         {text}

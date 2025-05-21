@@ -58,9 +58,27 @@ const AnimatedCounter = ({
   return <span ref={counterRef}>{count}</span>;
 };
 
-const AnimatedButton = ({ text, link }: { text: string; link: string }) => {
+const AnimatedButton = ({
+  text,
+  link,
+  downloadFile,
+}: {
+  text: string;
+  link: string;
+  downloadFile?: string;
+}) => {
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+
+    if (downloadFile) {
+      const a = document.createElement("a");
+      a.href = downloadFile;
+      a.download = downloadFile.split("/").pop() || "file";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      return;
+    }
 
     if (link.startsWith("#")) {
       const targetId = link.substring(1);
@@ -81,6 +99,7 @@ const AnimatedButton = ({ text, link }: { text: string; link: string }) => {
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       transition={{ type: "spring", stiffness: 400, damping: 10 }}
+      className="cursor-pointer"
     >
       <ButtonOne text={text} link={link} onClick={handleClick} />
     </motion.div>
@@ -235,8 +254,12 @@ export default function Hero() {
                 className="flex flex-col gap-4 lg:flex-row mb-8"
                 variants={itemVariants}
               >
-                <AnimatedButton text="my works" link="#projects" />
                 <AnimatedButton text="contact" link="#contact" />
+                <AnimatedButton
+                  text="download cv"
+                  link="#"
+                  downloadFile="/IshanArdithyaCV.pdf"
+                />
               </motion.div>
             </motion.div>
 
