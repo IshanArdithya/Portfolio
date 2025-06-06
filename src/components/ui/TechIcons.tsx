@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { techIcons } from "../home/constants";
+import { techIcons } from "@/constants/constants";
 import { useTheme } from "@/context/ThemeContext";
 import {
   HoverCard,

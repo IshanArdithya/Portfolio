@@ -62,6 +62,7 @@ export const statistics: Statistic[] = [
   {
     label: "Age",
     birthYear: 2002,
+    birthMonth: 10,
   },
   {
     value: 3,

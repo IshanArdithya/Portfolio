@@ -4,7 +4,7 @@ import { useTheme } from "@/context/ThemeContext";
 import { AnimatePresence, motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { FaCopy, FaCheck } from "react-icons/fa";
-import { profile, socialLinks } from "./constants";
+import { profile, socialLinks } from "@/constants/constants";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { AnimatedCircleFooterGridPattern } from "@/components/home/GridPattern";
 import { IoIosSend } from "react-icons/io";

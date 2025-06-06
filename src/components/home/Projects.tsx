@@ -6,7 +6,7 @@ import { ExternalLink } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
-import { projects } from "./constants";
+import { projects } from "@/constants/constants";
 import { TechIcon } from "../ui/TechIcons";
 
 const ExternalLinkButton = ({ url, text }: { url: string; text: string }) => {

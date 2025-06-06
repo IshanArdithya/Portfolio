@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useTheme } from "@/context/ThemeContext";
-import { navBar, profile } from "@/components/home/constants";
+import { navBar, profile } from "@/constants/constants";
 import {
   Navbar,
   NavBody,
