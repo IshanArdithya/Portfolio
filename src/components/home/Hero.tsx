@@ -279,11 +279,18 @@ export default function Hero() {
             <div className="mx-auto w-full gap-4">
               <div className="flex flex-wrap items-center align-middle justify-between w-full gap-6">
                 {statistics.map((stat, index) => {
-                  const currentYear = new Date().getFullYear();
+                  const currentDate = new Date();
+                  const currentYear = currentDate.getFullYear();
+                  const currentMonth = currentDate.getMonth() + 1;
+
                   const displayValue =
-                    stat.birthYear !== undefined
-                      ? currentYear - stat.birthYear
+                    stat.birthYear !== undefined &&
+                    stat.birthMonth !== undefined
+                      ? currentYear -
+                        stat.birthYear -
+                        (currentMonth < stat.birthMonth ? 1 : 0)
                       : stat.value ?? 0;
+
                   return (
                     <motion.div
                       key={index}

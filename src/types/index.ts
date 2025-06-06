@@ -19,6 +19,7 @@ export type Statistic = {
   value?: number;
   label: string;
   birthYear?: number;
+  birthMonth?: number;
 };
 
 export type SocialLink = {
