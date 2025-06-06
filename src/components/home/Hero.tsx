@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import ButtonOne from "@/components/ui/ButtonOne";
-import { profile, socialLinks, statistics, tags } from "./constants";
+import { profile, socialLinks, statistics, tags } from "@/constants/constants";
 import Marquee from "react-fast-marquee";
 import { useTheme } from "@/context/ThemeContext";
 import { AnimatedCircleGridPattern } from "@/components/home/GridPattern";

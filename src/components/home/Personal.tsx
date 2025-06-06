@@ -4,7 +4,7 @@ import { useTheme } from "@/context/ThemeContext";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState, useId, useCallback, memo } from "react";
 import { WobbleCard } from "../ui/wobble-card";
-import { interests } from "./constants";
+import { interests } from "@/constants/constants";
 import Image from "next/image";
 import { useOutsideClick } from "@/hooks/use-outside-click";
 import { X } from "lucide-react";
