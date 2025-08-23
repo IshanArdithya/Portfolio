@@ -34,5 +34,5 @@ jobs:
             docker stop portfolio || true
             docker rm portfolio || true
 
-            docker run -d -p 3001:3000 --name portfolio portfolio
+            docker run -d --restart unless-stopped -p 3001:3000 --name portfolio portfolio
 
