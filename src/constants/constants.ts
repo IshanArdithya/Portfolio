@@ -69,7 +69,7 @@ export const statistics: Statistic[] = [
     label: "Years of experience",
   },
   {
-    value: 11,
+    value: 12,
     label: "Projects worked on",
   },
   {
@@ -192,6 +192,12 @@ export const techIcons: TechIcons = {
     description:
       "A high-level programming language used for building a wide range of applications, including web, mobile, and desktop.",
   },
+  python: {
+    image: "/icons/python.svg",
+    name: "Python",
+    description:
+      "A high-level, versatile programming language known for readability, used for web, automation, data science, and AI/ML.",
+  },
   php: {
     image: "/icons/php.svg",
     name: "PHP",
@@ -219,6 +225,22 @@ export const techIcons: TechIcons = {
 };
 
 export const projects: Project[] = [
+  {
+    name: "EVRS",
+    category: "healthcare",
+    description:
+      "A full-stack app to manage vaccination records for citizens, providers, MOH, hospitals & admins with ML-based risk scoring.",
+    image: "/images/projects/EVRS.webp?height=300&width=400",
+    technologies: [
+      "next",
+      "tailwind",
+      "express",
+      "mongodb",
+      "python",
+      "typescript",
+    ],
+    githubUrl: "https://github.com/IshanArdithya/EVRS",
+  },
   {
     name: "NextuneLK",
     category: "marketing",
