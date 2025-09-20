@@ -10,7 +10,6 @@ FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-
 RUN npm run build
 
 FROM base AS runner
@@ -26,8 +25,7 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
 
 USER nextjs
 
-EXPOSE 3000
-
-ENV PORT=3000
+EXPOSE 3001
+ENV PORT=3001
 
 CMD ["npm", "start"]
