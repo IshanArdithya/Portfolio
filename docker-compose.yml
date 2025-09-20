@@ -2,11 +2,7 @@ version: "3.8"
 
 services:
   portfolio:
-    build: .
+    build: ./Portfolio
     restart: unless-stopped
     ports:
       - "3001:3000"
-    volumes:
-      - ./data:/app/data
-    environment:
-      - NODE_ENV=production
