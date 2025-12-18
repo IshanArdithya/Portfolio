@@ -11,6 +11,7 @@ import {
   useInView,
   useMotionValue,
   useAnimationFrame,
+  Variants,
 } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
@@ -142,7 +143,7 @@ export default function Hero() {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: false, amount: 0.1 });
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -153,7 +154,7 @@ export default function Hero() {
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
@@ -166,7 +167,7 @@ export default function Hero() {
     },
   };
 
-  const socialVariants = {
+  const socialVariants: Variants = {
     hidden: { opacity: 0, scale: 0 },
     visible: (i: number) => ({
       opacity: 1,
@@ -285,10 +286,10 @@ export default function Hero() {
 
                   const displayValue =
                     stat.birthYear !== undefined &&
-                    stat.birthMonth !== undefined
+                      stat.birthMonth !== undefined
                       ? currentYear -
-                        stat.birthYear -
-                        (currentMonth < stat.birthMonth ? 1 : 0)
+                      stat.birthYear -
+                      (currentMonth < stat.birthMonth ? 1 : 0)
                       : stat.value ?? 0;
 
                   return (

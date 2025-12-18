@@ -1,8 +1,0 @@
-version: "3.8"
-
-services:
-  portfolio:
-    build: .
-    restart: unless-stopped
-    ports:
-      - "3001:3001"

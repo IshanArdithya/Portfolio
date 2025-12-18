@@ -230,7 +230,7 @@ export const projects: Project[] = [
     category: "healthcare",
     description:
       "A full-stack app to manage vaccination records for citizens, providers, MOH, hospitals & admins with ML-based risk scoring.",
-    image: "/images/projects/EVRS.webp?height=300&width=400",
+    image: "/images/projects/EVRS.webp",
     technologies: [
       "next",
       "tailwind",
@@ -246,7 +246,7 @@ export const projects: Project[] = [
     category: "marketing",
     description:
       "A website to check data usage, view server stats, see available plans, and follow a step-by-step setup guide.",
-    image: "/images/projects/NextuneLK.webp?height=300&width=400",
+    image: "/images/projects/NextuneLK.webp",
     technologies: ["next", "tailwind", "express", "typescript"],
     githubUrl: "https://github.com/IshanArdithya/NextuneLK",
     url: "https://www.nextunelk.com/",
@@ -256,7 +256,7 @@ export const projects: Project[] = [
     category: "marketing",
     description:
       "A single-page website UI for a build and web hosting service, showcasing plans, features, and contact options.",
-    image: "/images/projects/WebForge.webp?height=300&width=400",
+    image: "/images/projects/WebForge.webp",
     technologies: ["react", "tailwind"],
     githubUrl: "https://github.com/IshanArdithya/WebForge",
   },
@@ -265,7 +265,7 @@ export const projects: Project[] = [
     category: "tourism",
     description:
       "A tourism website with tour packages, hotel bookings, tour guide hiring, and destination insights for travelers exploring Sri Lanka.",
-    image: "/images/projects/ExploreSriLanka.webp?height=300&width=400",
+    image: "/images/projects/ExploreSriLanka.webp",
     technologies: ["html", "css", "javascript", "node", "php", "mysql"],
     githubUrl: "https://github.com/IshanArdithya/ExploreSriLanka",
   },
@@ -274,7 +274,7 @@ export const projects: Project[] = [
     category: "transport",
     description:
       "A cab booking web app offering ride-hailing services with a clean interface, booking features, and a seamless user experience.",
-    image: "/images/projects/MegaCityCab.webp?height=300&width=400",
+    image: "/images/projects/MegaCityCab.webp",
     technologies: ["html", "css", "javascript", "java", "mysql"],
     githubUrl: "https://github.com/IshanArdithya/MegaCityCab",
   },
@@ -283,7 +283,7 @@ export const projects: Project[] = [
     category: "restaurant",
     description:
       "A dynamic restaurant website with a menu, online orders, table reservations, and a smooth checkout experience.",
-    image: "/images/projects/TheOuterClove.webp?height=300&width=400",
+    image: "/images/projects/TheOuterClove.webp",
     technologies: ["html", "css", "javascript", "php", "mysql"],
     githubUrl: "https://github.com/IshanArdithya/TheOuterClove",
   },
