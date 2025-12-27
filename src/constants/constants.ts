@@ -109,7 +109,7 @@ export const socialLinks: SocialLink[] = [
 export const experiences: Experience[] = [
   {
     startDate: "2025 March",
-    endDate: "Present",
+    endDate: "2025 September",
     title: "Software Engineer Intern",
     company: "Enored",
     companylogo: "/images/experiences/enoredtech_logo.jpeg",
