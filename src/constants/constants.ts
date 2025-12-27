@@ -114,7 +114,7 @@ export const experiences: Experience[] = [
     company: "Enored",
     companylogo: "/images/experiences/enoredtech_logo.jpeg",
     description:
-      "At Enored Inc., I work as a full-stack web developer, building and maintaining web applications for a variety of projects. I’m involved in both front-end and back-end development, focusing on creating smooth, reliable, and user-friendly systems. I also collaborate with the team to solve technical challenges, streamline workflows, and deliver high-quality solutions that meet project requirements.",
+      "At Enored Inc., I worked as a full-stack web developer, building and maintaining web applications across multiple projects. I contributed to both front-end and back-end development, focusing on creating smooth, reliable, and user-friendly systems. I collaborated closely with the team to solve technical challenges, streamline workflows, and deliver high-quality solutions that met project requirements.",
     links: [
       {
         type: "linkedin",
