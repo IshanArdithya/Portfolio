@@ -27,14 +27,14 @@ export const TechIcon = ({ type }: { type: string }) => {
           />
         </div>
       </HoverCardTrigger>
-      <HoverCardContent className="w-80">
+      <HoverCardContent className={`w-80 ${theme.navBackground} ${theme.borderMuted} ${theme.text}`}>
         <div className="flex justify-between space-x-4">
           <Avatar>
             <AvatarImage src={image} alt={name} width={80} height={80} />
           </Avatar>
           <div className="space-y-1">
             <h4 className="text-sm font-semibold">{name}</h4>
-            <p className="text-sm">{description}</p>
+            <p className={`text-sm ${theme.textMuted}`}>{description}</p>
           </div>
         </div>
       </HoverCardContent>
