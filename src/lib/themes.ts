@@ -44,6 +44,10 @@ export interface Theme {
 
   gradientFrom: string;
   gradientTo: string;
+
+  scrollbarThumb: string;
+  scrollbarHover: string;
+  scrollbarTrack: string;
 }
 
 export const themes: Record<ThemeKey, Theme> = {
@@ -55,7 +59,7 @@ export const themes: Record<ThemeKey, Theme> = {
     neutral: "slate-800",
 
     // background
-    background: "bg-[rgb(28,28,34)]/100", // bg-[#121212]
+    background: "bg-[rgb(28,28,34)]", // bg-[#121212]
     backgroundAlt: "bg-slate-800",
     backgroundAccent: "bg-indigo-500",
 
@@ -98,5 +102,10 @@ export const themes: Record<ThemeKey, Theme> = {
     // gradients
     gradientFrom: "from-indigo-500/10",
     gradientTo: "to-[rgb(22,22,29)]/10",
+
+    // scrollbar
+    scrollbarThumb: "#6366f1", // indigo-500
+    scrollbarHover: "#4f46e5", // indigo-600
+    scrollbarTrack: "#151518",
   },
 };
