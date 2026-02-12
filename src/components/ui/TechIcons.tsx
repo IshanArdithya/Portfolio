@@ -8,12 +8,18 @@ import {
 } from "@/components/ui/hover-card";
 import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
 
-export const TechIcon = ({ type }: { type: string }) => {
+export const TechIcon = ({
+  type,
+  onOpenChange,
+}: {
+  type: string;
+  onOpenChange?: (open: boolean) => void;
+}) => {
   const { theme } = useTheme();
   const { image, name, description } = techIcons[type] || {};
 
   return image ? (
-    <HoverCard>
+    <HoverCard onOpenChange={onOpenChange} openDelay={100} closeDelay={100}>
       <HoverCardTrigger asChild>
         <div
           className={`w-6 h-6 flex items-center justify-center rounded-full border ${theme.borderMuted} p-1`}

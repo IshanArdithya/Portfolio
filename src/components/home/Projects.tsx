@@ -5,7 +5,7 @@ import { motion, useInView, Variants } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { projects } from "@/constants/constants";
 import { TechIcon } from "../ui/TechIcons";
 
@@ -19,14 +19,14 @@ const ExternalLinkButton = ({ url, text }: { url: string; text: string }) => {
       href={url}
       className={`inline-flex items-center text-sm font-medium uppercase ${theme.textAccent} ${theme.hoverText} transition-all duration-75 group relative`}
       initial="initial"
-      whileHover="hovered"
+      whileHover="buttonHover"
     >
       <span className="relative z-5">{text}</span>
       <motion.div
         className="inline-flex items-center ml-1"
         variants={{
           initial: { x: 0 },
-          hovered: { x: 2 },
+          buttonHover: { x: 2 },
         }}
         transition={{ type: "spring", stiffness: 400, damping: 10 }}
       >
@@ -36,21 +36,12 @@ const ExternalLinkButton = ({ url, text }: { url: string; text: string }) => {
   );
 };
 
-export default function Projects() {
+const ProjectCard = ({ project, index }: { project: (typeof projects)[0]; index: number }) => {
   const { theme } = useTheme();
-  const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: false, amount: 0.1 });
+  const [isCardHovered, setIsCardHovered] = useState(false);
+  const [activeTooltipIndex, setActiveTooltipIndex] = useState<number | null>(null);
 
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.3,
-      },
-    },
-  };
+  const showHover = isCardHovered || activeTooltipIndex !== null;
 
   const cardVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
@@ -62,6 +53,19 @@ export default function Projects() {
         stiffness: 100,
         damping: 12,
       },
+    },
+  };
+
+  const innerHoverVariants: Variants = {
+    rest: {
+      y: 0,
+      boxShadow: "0 0 0 0 rgba(0, 0, 0, 0)",
+    },
+    hovered: {
+      y: -8,
+      boxShadow:
+        "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+      transition: { type: "spring", stiffness: 300, damping: 15 },
     },
   };
 
@@ -77,6 +81,142 @@ export default function Projects() {
         damping: 10,
       },
     }),
+    hovered: {
+      scale: 1.1,
+      y: -2,
+      rotate: 0,
+      transition: { type: "spring", stiffness: 300, damping: 10 },
+    },
+  };
+
+  return (
+    <motion.div
+      variants={cardVariants}
+      className="relative"
+      onHoverStart={() => setIsCardHovered(true)}
+      onHoverEnd={() => setIsCardHovered(false)}
+    >
+      <motion.div
+        className={`h-full w-full rounded-lg overflow-hidden border ${theme.borderMuted} ${theme.cardBackground}`}
+        animate={showHover ? "hovered" : "rest"}
+        variants={innerHoverVariants}
+      >
+        <div className="p-6">
+          <motion.div
+            className="relative h-[200px] mb-4 rounded-lg overflow-hidden"
+            whileHover={{ scale: 1.03 }}
+            transition={{ type: "spring", stiffness: 300, damping: 15 }}
+          >
+            <Image
+              src={project.image || "/images/projects/placeholder.webp"}
+              alt={project.name}
+              fill
+              className="object-cover transition-transform duration-500 hover:scale-110"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
+          </motion.div>
+
+          <div className="flex items-center justify-between mb-2">
+            <motion.h3
+              className="text-xl font-bold"
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2 * index, duration: 0.5 }}
+            >
+              {project.name}
+            </motion.h3>
+            <div className="flex space-x-2">
+              {project.technologies.map((tech, i) => (
+                <motion.div
+                  key={i}
+                  custom={i}
+                  variants={techIconVariants}
+                  transition={{
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 10,
+                  }}
+                >
+                  <motion.div
+                    animate={
+                      activeTooltipIndex === i
+                        ? { scale: 1.2, rotate: 5 }
+                        : undefined
+                    }
+                    whileHover={{ scale: 1.2, rotate: 5 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 300,
+                      damping: 10,
+                    }}
+                  >
+                    <TechIcon
+                      type={tech}
+                      onOpenChange={(open) =>
+                        setActiveTooltipIndex(open ? i : null)
+                      }
+                    />
+                  </motion.div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          <motion.div
+            className="mb-3"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.1 * index, duration: 0.4 }}
+          >
+            <span
+              className={`inline-block rounded-full ${theme.backgroundAccent} px-3 py-1 text-xs ${theme.text}`}
+            >
+              {project.category}
+            </span>
+          </motion.div>
+
+          <motion.p
+            className={`text-sm ${theme.textMuted} mb-4 line-clamp-3`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 * index, duration: 0.5 }}
+          >
+            {project.description}
+          </motion.p>
+
+          <motion.div
+            className="flex items-center space-x-4"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 * index, duration: 0.5 }}
+          >
+            {project.githubUrl && (
+              <ExternalLinkButton url={project.githubUrl} text="Github" />
+            )}
+
+            {project.url && (
+              <ExternalLinkButton url={project.url} text="Visit Website" />
+            )}
+          </motion.div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+};
+
+export default function Projects() {
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: false, amount: 0.1 });
+
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.3,
+      },
+    },
   };
 
   return (
@@ -101,101 +241,7 @@ export default function Projects() {
           animate={isInView ? "visible" : "hidden"}
         >
           {projects.map((project, index) => (
-            <motion.div
-              key={index}
-              className={`rounded-lg overflow-hidden border ${theme.borderMuted} ${theme.cardBackground} shadow-lg`}
-              variants={cardVariants}
-              whileHover={{
-                y: -8,
-                boxShadow:
-                  "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
-                transition: { type: "spring", stiffness: 300, damping: 15 },
-              }}
-            >
-              <div className="p-6">
-                <motion.div
-                  className="relative h-[200px] mb-4 rounded-lg overflow-hidden"
-                  whileHover={{ scale: 1.03 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                >
-                  <Image
-                    src={project.image || "/images/projects/placeholder.webp"}
-                    alt={project.name}
-                    fill
-                    className="object-cover transition-transform duration-500 hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
-                </motion.div>
-
-                <div className="flex items-center justify-between mb-2">
-                  <motion.h3
-                    className="text-xl font-bold"
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.2 * index, duration: 0.5 }}
-                  >
-                    {project.name}
-                  </motion.h3>
-                  <div className="flex space-x-2">
-                    {project.technologies.map((tech, i) => (
-                      <motion.div
-                        key={i}
-                        custom={i}
-                        variants={techIconVariants}
-                        whileHover={{ scale: 1.2, rotate: 5 }}
-                        transition={{
-                          type: "spring",
-                          stiffness: 300,
-                          damping: 10,
-                        }}
-                      >
-                        <TechIcon type={tech} />
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-
-                <motion.div
-                  className="mb-3"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.1 * index, duration: 0.4 }}
-                >
-                  <span
-                    className={`inline-block rounded-full ${theme.backgroundAccent} px-3 py-1 text-xs ${theme.text}`}
-                  >
-                    {project.category}
-                  </span>
-                </motion.div>
-
-                <motion.p
-                  className={`text-sm ${theme.textMuted} mb-4 line-clamp-3`}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.3 * index, duration: 0.5 }}
-                >
-                  {project.description}
-                </motion.p>
-
-                <motion.div
-                  className="flex items-center space-x-4"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 * index, duration: 0.5 }}
-                >
-                  {project.githubUrl && (
-                    <ExternalLinkButton url={project.githubUrl} text="Github" />
-                  )}
-
-                  {project.url && (
-                    <ExternalLinkButton
-                      url={project.url}
-                      text="Visit Website"
-                    />
-                  )}
-                </motion.div>
-              </div>
-            </motion.div>
+            <ProjectCard key={index} project={project} index={index} />
           ))}
         </motion.div>
       </div>
