@@ -58,6 +58,7 @@ export type Project = {
   technologies: string[];
   githubUrl?: string;
   url?: string;
+  active?: boolean;
 };
 
 export type Interests = {

@@ -8,6 +8,12 @@ import Link from "next/link";
 import { useRef, useState } from "react";
 import { projects } from "@/constants/constants";
 import { TechIcon } from "../ui/TechIcons";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
+
 
 const MotionLink = motion.create(Link);
 
@@ -40,8 +46,9 @@ const ProjectCard = ({ project, index }: { project: (typeof projects)[0]; index:
   const { theme } = useTheme();
   const [isCardHovered, setIsCardHovered] = useState(false);
   const [activeTooltipIndex, setActiveTooltipIndex] = useState<number | null>(null);
+  const [isActiveTooltipOpen, setIsActiveTooltipOpen] = useState(false);
 
-  const showHover = isCardHovered || activeTooltipIndex !== null;
+  const showHover = isCardHovered || activeTooltipIndex !== null || isActiveTooltipOpen;
 
   const cardVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
@@ -116,16 +123,68 @@ const ProjectCard = ({ project, index }: { project: (typeof projects)[0]; index:
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
           </motion.div>
 
-          <div className="flex items-center justify-between mb-2">
-            <motion.h3
-              className="text-xl font-bold"
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2 * index, duration: 0.5 }}
+          <div className="flex flex-col gap-2 mb-4">
+            <motion.div
+              initial={{ opacity: 0, y: 5 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 * index, duration: 0.4 }}
             >
-              {project.name}
-            </motion.h3>
-            <div className="flex space-x-2">
+              <span
+                className={`text-[10px] font-bold uppercase tracking-widest ${theme.textAccent}`}
+              >
+                #{project.category}
+              </span>
+            </motion.div>
+
+            <div className="flex flex-wrap items-center gap-3">
+              <motion.h3
+                className="text-xl font-bold leading-none"
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.2 * index, duration: 0.5 }}
+              >
+                {project.name}
+              </motion.h3>
+
+              <HoverCard
+                openDelay={200}
+                closeDelay={200}
+                onOpenChange={setIsActiveTooltipOpen}
+              >
+                <HoverCardTrigger asChild>
+                  <div className="flex items-center gap-2 h-5 px-2 rounded-full bg-black/60 backdrop-blur-md border border-white/10 cursor-help">
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span
+                        className={`animate-ping absolute inline-flex h-full w-full rounded-full ${theme.backgroundAccent} opacity-75`}
+                      ></span>
+                      <span
+                        className={`relative inline-flex rounded-full h-1.5 w-1.5 ${theme.backgroundAccent}`}
+                      ></span>
+                    </span>
+                    <span className="text-[9px] font-medium text-white tracking-wider uppercase">
+                      Active
+                    </span>
+                  </div>
+                </HoverCardTrigger>
+                <HoverCardContent
+                  className={`w-auto px-4 py-3 ${theme.navBackground} ${theme.borderMuted} ${theme.text}`}
+                  side="top"
+                  align="center"
+                  sideOffset={5}
+                >
+                  <div className="space-y-1">
+                    {/*<h4 className="text-xs font-semibold uppercase tracking-wider">
+                        Status
+                      </h4>*/}
+                    <p className={`text-xs ${theme.textMuted}`}>
+                      Project being actively developed
+                    </p>
+                  </div>
+                </HoverCardContent>
+              </HoverCard>
+            </div>
+
+            <div className="flex flex-wrap gap-2 mt-2">
               {project.technologies.map((tech, i) => (
                 <motion.div
                   key={i}
@@ -161,19 +220,6 @@ const ProjectCard = ({ project, index }: { project: (typeof projects)[0]; index:
               ))}
             </div>
           </div>
-
-          <motion.div
-            className="mb-3"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.1 * index, duration: 0.4 }}
-          >
-            <span
-              className={`inline-block rounded-full ${theme.backgroundAccent} px-3 py-1 text-xs ${theme.text}`}
-            >
-              {project.category}
-            </span>
-          </motion.div>
 
           <motion.p
             className={`text-sm ${theme.textMuted} mb-4 line-clamp-3`}

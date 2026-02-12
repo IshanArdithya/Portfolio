@@ -250,6 +250,7 @@ export const projects: Project[] = [
     technologies: ["next", "tailwind", "express", "typescript"],
     githubUrl: "https://github.com/IshanArdithya/NextuneLK",
     url: "https://www.nextunelk.com/",
+    active: true,
   },
   {
     name: "WebForge",
