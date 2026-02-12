@@ -9,31 +9,30 @@ import { useRef } from "react";
 import { projects } from "@/constants/constants";
 import { TechIcon } from "../ui/TechIcons";
 
+const MotionLink = motion.create(Link);
+
 const ExternalLinkButton = ({ url, text }: { url: string; text: string }) => {
   const { theme } = useTheme();
-  const ref = useRef(null);
 
   return (
-    <Link
+    <MotionLink
       href={url}
       className={`inline-flex items-center text-sm font-medium uppercase ${theme.textAccent} ${theme.hoverText} transition-all duration-75 group relative`}
-      ref={ref}
+      initial="initial"
+      whileHover="hovered"
     >
       <span className="relative z-5">{text}</span>
       <motion.div
-        className="absolute bottom-0 left-0 h-[2px] bg-current"
-        initial={{ width: 0 }}
-        whileHover={{ width: "100%" }}
-        transition={{ duration: 0.2 }}
-      />
-      <motion.div
         className="inline-flex items-center ml-1"
-        whileHover={{ x: 2 }}
+        variants={{
+          initial: { x: 0 },
+          hovered: { x: 2 },
+        }}
         transition={{ type: "spring", stiffness: 400, damping: 10 }}
       >
         <ExternalLink className="w-[1em] h-[1em]" strokeWidth={2} />
       </motion.div>
-    </Link>
+    </MotionLink>
   );
 };
 
