@@ -5,7 +5,7 @@ import { motion, useInView, Variants } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { projects } from "@/constants/constants";
 import { TechIcon } from "../ui/TechIcons";
 import {
@@ -23,7 +23,7 @@ const ExternalLinkButton = ({ url, text }: { url: string; text: string }) => {
   return (
     <MotionLink
       href={url}
-      className={`inline-flex items-center text-sm font-medium uppercase ${theme.textAccent} ${theme.hoverText} transition-all duration-75 group relative`}
+      className={`inline-flex items-center text-sm font-medium uppercase ${theme.textAccent} ${theme.hoverText} transition-all duration-75 group relative select-none`}
       initial="initial"
       whileHover="buttonHover"
     >
@@ -42,13 +42,38 @@ const ExternalLinkButton = ({ url, text }: { url: string; text: string }) => {
   );
 };
 
-const ProjectCard = ({ project, index }: { project: (typeof projects)[0]; index: number }) => {
+const ProjectCard = ({
+  project,
+  index,
+  isActive,
+}: {
+  project: (typeof projects)[0];
+  index: number;
+  isActive: boolean;
+}) => {
   const { theme } = useTheme();
   const [isCardHovered, setIsCardHovered] = useState(false);
-  const [activeTooltipIndex, setActiveTooltipIndex] = useState<number | null>(null);
+  const [activeTooltipIndex, setActiveTooltipIndex] = useState<number | null>(
+    null
+  );
   const [isActiveTooltipOpen, setIsActiveTooltipOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-  const showHover = isCardHovered || activeTooltipIndex !== null || isActiveTooltipOpen;
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  const showHover =
+    (isMobile ? isActive : isCardHovered) ||
+    activeTooltipIndex !== null ||
+    isActiveTooltipOpen;
 
   const cardVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
@@ -69,7 +94,7 @@ const ProjectCard = ({ project, index }: { project: (typeof projects)[0]; index:
       boxShadow: "0 0 0 0 rgba(0, 0, 0, 0)",
     },
     hovered: {
-      y: -8,
+      y: isMobile ? -4 : -8,
       boxShadow:
         "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
       transition: { type: "spring", stiffness: 300, damping: 15 },
@@ -146,42 +171,44 @@ const ProjectCard = ({ project, index }: { project: (typeof projects)[0]; index:
                 {project.name}
               </motion.h3>
 
-              <HoverCard
-                openDelay={200}
-                closeDelay={200}
-                onOpenChange={setIsActiveTooltipOpen}
-              >
-                <HoverCardTrigger asChild>
-                  <div className="flex items-center gap-2 h-5 px-2 rounded-full bg-black/60 backdrop-blur-md border border-white/10 cursor-help">
-                    <span className="relative flex h-1.5 w-1.5">
-                      <span
-                        className={`animate-ping absolute inline-flex h-full w-full rounded-full ${theme.backgroundAccent} opacity-75`}
-                      ></span>
-                      <span
-                        className={`relative inline-flex rounded-full h-1.5 w-1.5 ${theme.backgroundAccent}`}
-                      ></span>
-                    </span>
-                    <span className="text-[9px] font-medium text-white tracking-wider uppercase">
-                      Active
-                    </span>
-                  </div>
-                </HoverCardTrigger>
-                <HoverCardContent
-                  className={`w-auto px-4 py-3 ${theme.navBackground} ${theme.borderMuted} ${theme.text}`}
-                  side="top"
-                  align="center"
-                  sideOffset={5}
+              {project.active && (
+                <HoverCard
+                  openDelay={200}
+                  closeDelay={200}
+                  onOpenChange={setIsActiveTooltipOpen}
                 >
-                  <div className="space-y-1">
-                    {/*<h4 className="text-xs font-semibold uppercase tracking-wider">
+                  <HoverCardTrigger asChild>
+                    <div className="flex items-center gap-2 h-5 px-2 rounded-full bg-black/60 backdrop-blur-md border border-white/10 cursor-help select-none">
+                      <span className="relative flex h-1.5 w-1.5">
+                        <span
+                          className={`animate-ping absolute inline-flex h-full w-full rounded-full ${theme.backgroundAccent} opacity-75`}
+                        ></span>
+                        <span
+                          className={`relative inline-flex rounded-full h-1.5 w-1.5 ${theme.backgroundAccent}`}
+                        ></span>
+                      </span>
+                      <span className="text-[9px] font-medium text-white tracking-wider uppercase">
+                        Active
+                      </span>
+                    </div>
+                  </HoverCardTrigger>
+                  <HoverCardContent
+                    className={`w-auto px-4 py-3 ${theme.navBackground} ${theme.borderMuted} ${theme.text} select-none`}
+                    side="top"
+                    align="center"
+                    sideOffset={5}
+                  >
+                    <div className="space-y-1">
+                      {/*<h4 className="text-xs font-semibold uppercase tracking-wider">
                         Status
                       </h4>*/}
-                    <p className={`text-xs ${theme.textMuted}`}>
-                      Project being actively developed
-                    </p>
-                  </div>
-                </HoverCardContent>
-              </HoverCard>
+                      <p className={`text-xs ${theme.textMuted}`}>
+                        Project being actively developed
+                      </p>
+                    </div>
+                  </HoverCardContent>
+                </HoverCard>
+              )}
             </div>
 
             <div className="flex flex-wrap gap-2 mt-2">
@@ -190,6 +217,8 @@ const ProjectCard = ({ project, index }: { project: (typeof projects)[0]; index:
                   key={i}
                   custom={i}
                   variants={techIconVariants}
+                  initial="hidden"
+                  animate="visible"
                   transition={{
                     type: "spring",
                     stiffness: 300,
@@ -265,14 +294,43 @@ export default function Projects() {
     },
   };
 
+  const [activeCardIndex, setActiveCardIndex] = useState(0);
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            if (window.innerWidth < 768) {
+              const index = Number(entry.target.getAttribute("data-index"));
+              setActiveCardIndex(index);
+            }
+          }
+        });
+      },
+      {
+        root: null,
+        threshold: 0.6,
+        rootMargin: "0px",
+      }
+    );
+
+    cardsRef.current.forEach((card) => {
+      if (card) observer.observe(card);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section
       ref={sectionRef}
-      className={`relative min-h-screen flex flex-col items-center justify-between px-6 py-20 overflow-hidden`}
+      className={`relative flex flex-col items-center justify-between px-6 py-10 md:py-20 overflow-hidden`}
     >
       <div className="relative w-full max-w-7xl mx-auto">
         <motion.h1
-          className="text-5xl font-bold text-center mb-16"
+          className="text-3xl md:text-5xl font-bold text-center mb-8 md:mb-16"
           initial={{ opacity: 0, y: -20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
           transition={{ duration: 0.7, type: "spring", stiffness: 100 }}
@@ -281,13 +339,22 @@ export default function Projects() {
         </motion.h1>
 
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="flex overflow-x-auto pt-3 md:pt-0 -mx-6 px-6 snap-x snap-mandatory gap-6 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-8 md:mx-0 md:px-0 md:overflow-visible [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
         >
           {projects.map((project, index) => (
-            <ProjectCard key={index} project={project} index={index} />
+            <div
+              key={index}
+              ref={(el) => {
+                cardsRef.current[index] = el;
+              }}
+              data-index={index}
+              className="min-w-[85vw] sm:min-w-[450px] md:min-w-0 snap-center md:snap-align-none"
+            >
+              <ProjectCard project={project} index={index} isActive={activeCardIndex === index} />
+            </div>
           ))}
         </motion.div>
       </div>

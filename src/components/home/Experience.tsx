@@ -16,11 +16,11 @@ export default function Experience() {
   return (
     <section
       ref={sectionRef}
-      className={`relative flex flex-col items-center justify-between px-6 py-20 overflow-hidden`}
+      className={`relative flex flex-col items-center justify-between px-6 py-10 md:py-20 overflow-hidden`}
     >
-      <div className="relative w-full max-w-7xl mx-auto">
+      <div className="relative w-full max-w-5xl mx-auto">
         <motion.h1
-          className="text-5xl font-bold text-center mb-16"
+          className="text-3xl md:text-5xl font-bold text-center mb-8 md:mb-16"
           initial={{ opacity: 0, y: -20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
           transition={{ duration: 0.7, type: "spring", stiffness: 100 }}
@@ -28,7 +28,7 @@ export default function Experience() {
           Experience
         </motion.h1>
 
-        <div className="space-y-12">
+        <div className="flex flex-col gap-8">
           {experiences.map((exp, index) => (
             <motion.div
               key={index}
@@ -36,143 +36,92 @@ export default function Experience() {
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="w-full"
             >
-              <motion.div
-                className={`group relative overflow-hidden border ${theme.borderMuted} ${theme.cardBackground} rounded-2xl p-6 md:p-8 backdrop-blur-sm bg-opacity-5
-                }`}
-                whileHover={{
-                  scale: 1.02,
-                  boxShadow: "0 10px 30px -15px rgba(0, 0, 0, 0.3)",
+              <div
+                className={`relative w-full overflow-hidden border ${theme.borderMuted} rounded-4xl flex flex-col p-6 md:p-8 group transition-all duration-300`}
+                style={{
+                  background:
+                    "linear-gradient(to bottom, #16161B 10%, #1B1B21 80%)",
                 }}
-                transition={{ duration: 0.2 }}
               >
-                <div
-                  className={`absolute inset-0 bg-gradient-to-r ${theme.gradientFrom} ${theme.gradientTo} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
-                ></div>
+                {/* light hover */}
+                <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0" />
 
-                <div className="flex flex-col md:flex-row gap-5 md:gap-8 relative z-10">
-                  <div className="flex-shrink-0 flex items-start justify-center md:justify-start">
-                    <div className="relative">
-                      <div
-                        className={`relative ${theme.borderMuted} rounded-2xl border-2 transition-transform duration-700 group-hover:animate-pulse`}
-                      >
-                        <Image
-                          src={
-                            exp.companylogo || "/placeholderlogo_company.png"
-                          }
-                          alt={`${exp.company} logo`}
-                          width={100}
-                          height={100}
-                          className="rounded-xl object-cover"
-                        />
-                      </div>
-                    </div>
+                {/* header row */}
+                <div className="flex flex-col md:flex-row gap-4 items-center md:items-start mb-4">
+                  {/* logo container */}
+                  <div className="relative shrink-0">
+                    <Image
+                      src={exp.companylogo || "/placeholderlogo_company.png"}
+                      alt={`${exp.company} logo`}
+                      width={120}
+                      height={120}
+                      className="w-20 h-20 md:w-23 md:h-23 object-contain rounded-xl border-2 border-white/10 md:group-hover:animate-pulse"
+                    />
                   </div>
 
-                  <div className="flex-1 space-y-4">
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                      <span
-                        className={`mx-auto md:mx-0 text-sm font-medium px-3 py-1 rounded-full inline-flex items-center ${theme.backgroundAccent} bg-opacity-20 w-fit`}
-                      >
-                        {exp.startDate} — {exp.endDate}
-                      </span>
+                  {/* header text details */}
+                  <div className="flex flex-col flex-grow pt-1">
+                    <h3 className="text-xl md:text-2xl font-bold text-white mb-1 leading-tight">
+                      {exp.title}
+                    </h3>
 
+                    <div className="flex items-center gap-2 mb-1">
+                      <h4 className="text-base md:text-lg font-medium text-gray-400">
+                        {exp.company}
+                      </h4>
                       {exp.links && exp.links.length > 0 && (
-                        <div className="hidden sm:flex items-center gap-3">
+                        <div className="flex items-center gap-1 opacity-70 hover:opacity-100 transition-opacity">
                           {exp.links.map((link, i) => {
                             const Icon =
                               link.type === "linkedin" ? FaLinkedin : FaGlobe;
                             return (
-                              <motion.div
+                              <Link
                                 key={i}
-                                whileHover={{ scale: 1.2 }}
-                                whileTap={{ scale: 0.9 }}
+                                href={link.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-gray-400 hover:text-white transition-colors p-1"
                               >
-                                <Link
-                                  href={link.url}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className={`${theme.hoverText} flex items-center justify-center w-9 h-9 rounded-full bg-gray-800 transition-colors duration-200`}
-                                  aria-label={
-                                    link.type === "linkedin"
-                                      ? "LinkedIn profile"
-                                      : "Website"
-                                  }
-                                >
-                                  <Icon className="text-lg" />
-                                </Link>
-                              </motion.div>
+                                <Icon className="text-base md:text-lg" />
+                              </Link>
                             );
                           })}
                         </div>
                       )}
                     </div>
 
-                    <div>
-                      <h3
-                        className={`text-2xl font-bold mb-1 ${theme.groupHoverText} transition-colors duration-200`}
-                      >
-                        {exp.title}
-                      </h3>
-                      <div className="flex items-center gap-2 mb-4">
-                        <h4 className="text-xl font-medium opacity-90">
-                          {exp.company}
-                        </h4>
-
-                        {exp.links && exp.links.length > 0 && (
-                          <div className="flex sm:hidden items-center gap-2">
-                            {exp.links.map((link, i) => {
-                              const Icon =
-                                link.type === "linkedin" ? FaLinkedin : FaGlobe;
-                              return (
-                                <motion.div
-                                  key={i}
-                                  whileHover={{ scale: 1.2 }}
-                                  whileTap={{ scale: 0.9 }}
-                                >
-                                  <Link
-                                    href={link.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className={`${theme.hoverText} flex items-center justify-center w-7 h-7 rounded-full bg-gray-800 transition-colors duration-200`}
-                                    aria-label={
-                                      link.type === "linkedin"
-                                        ? "LinkedIn profile"
-                                        : "Website"
-                                    }
-                                  >
-                                    <Icon className="text-sm" />
-                                  </Link>
-                                </motion.div>
-                              );
-                            })}
-                          </div>
-                        )}
-                      </div>
-                      <p
-                        className={`${theme.textMuted} text-base leading-relaxed`}
-                      >
-                        {exp.description}
-                      </p>
-                    </div>
-
-                    {exp.tech && exp.tech.length > 0 && (
-                      <div className="flex flex-wrap gap-2 pt-2">
-                        {exp.tech.map((techName, t) => (
-                          <motion.span
-                            key={t}
-                            className={`rounded-full ${theme.backgroundAccent} px-3 py-1 text-sm font-medium text-purple-50`}
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                          >
-                            {techName}
-                          </motion.span>
-                        ))}
-                      </div>
-                    )}
+                    <p className={`${theme.dateText} font-medium text-xs md:text-sm tracking-wide uppercase`}>
+                      {exp.startDate} — {exp.endDate}
+                    </p>
                   </div>
                 </div>
-              </motion.div>
+
+                {/* divider line */}
+                <div className={`w-full h-px ${theme.divider} mb-6`} />
+
+                {/* description */}
+                <div className="w-full">
+                  <p className="text-gray-400 text-base leading-relaxed mb-6">
+                    {exp.description}
+                  </p>
+
+                  {/* tags */}
+                  {exp.tech && exp.tech.length > 0 && (
+                    <div className="flex flex-wrap gap-2">
+                      {exp.tech.map((techName, t) => (
+                        <span
+                          key={t}
+                          className={`inline-block text-xs font-semibold px-4 py-2 rounded-full ${theme.tagBase} transition-transform hover:scale-105`}
+                        >
+                          {techName}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
             </motion.div>
           ))}
         </div>

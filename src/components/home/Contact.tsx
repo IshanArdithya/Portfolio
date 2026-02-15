@@ -5,7 +5,6 @@ import { AnimatePresence, motion, useInView, Variants } from "framer-motion";
 import { useRef, useState } from "react";
 import { FaCopy, FaCheck } from "react-icons/fa";
 import { profile, socialLinks } from "@/constants/constants";
-import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { AnimatedCircleFooterGridPattern } from "@/components/home/GridPattern";
 import { IoIosSend } from "react-icons/io";
 
@@ -14,7 +13,6 @@ export default function Contact() {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: false, amount: 0.1 });
   const [copied, setCopied] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
 
   const copyToClipboard = () => {
     if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -22,7 +20,7 @@ export default function Contact() {
         .writeText(profile.email)
         .then(() => {
           setCopied(true);
-          setTimeout(() => setCopied(false), 5000);
+          setTimeout(() => setCopied(false), 3000);
         })
         .catch(() => {
           fallbackCopyTextToClipboard(profile.email);
@@ -33,11 +31,10 @@ export default function Contact() {
   };
 
   const fallbackCopyTextToClipboard = (text: string) => {
-    // Create a temporary textarea to copy text on older browsers
+    // temp textarea to copy text on old browsers
     const textArea = document.createElement("textarea");
     textArea.value = text;
 
-    // Avoid scrolling to bottom
     textArea.style.position = "fixed";
     textArea.style.top = "0";
     textArea.style.left = "0";
@@ -57,11 +54,10 @@ export default function Contact() {
       const successful = document.execCommand("copy");
       if (successful) {
         setCopied(true);
-        setTimeout(() => setCopied(false), 5000);
+        setTimeout(() => setCopied(false), 3000);
       } else {
         alert("Failed to copy email.");
       }
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {
       alert("Failed to copy email.");
     }
@@ -69,165 +65,120 @@ export default function Contact() {
     document.body.removeChild(textArea);
   };
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants: Variants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: { type: "spring", stiffness: 100 },
-    },
-  };
-
-  const textVariants = {
-    initial: { opacity: 0, y: 10 },
-    animate: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: -10 },
-  };
-
   return (
     <section
       ref={sectionRef}
-      className={`relative flex flex-col items-center justify-center px-6 py-20 overflow-hidden`}
+      className={`relative flex flex-col items-center justify-center px-6 py-20 overflow-hidden min-h-[60vh]`}
     >
-      <div className="absolute inset-0 w-full h-full z-1 opacity-30">
+      <div className="absolute inset-0 w-full h-full z-0 opacity-40">
         <AnimatedCircleFooterGridPattern />
       </div>
+
       <div className="relative w-full max-w-7xl mx-auto z-10">
-        <motion.h1
-          className="text-5xl font-bold text-center mb-10"
+        {/* section title */}
+        {/* <motion.h1
+          className="text-5xl font-bold text-center mb-16"
           initial={{ opacity: 0, y: -20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
           transition={{ duration: 0.7, type: "spring", stiffness: 100 }}
         >
           Contact
-        </motion.h1>
+        </motion.h1> */}
 
         <motion.div
-          className="flex flex-col items-center justify-center gap-10"
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+          transition={{ duration: 0.8, type: "spring", stiffness: 60 }}
+          className="relative w-full"
         >
-          {/* contact card */}
-          <motion.div variants={itemVariants} className="w-full max-w-5xl">
-            <p className={`text-center mb-12 ${theme.textMuted}`}>
-              I&apos;m always open to discussing new projects, creative ideas or
-              opportunities to be part of your vision.
-            </p>
-            <div className="flex justify-center">
-              <HoverBorderGradient
-                containerClassName="rounded-full cursor-pointer"
-                className={`${theme.cardBackground} ${theme.text} flex items-center justify-center min-w-[270px] px-6 py-3`}
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
+          <div
+            className={`relative w-full overflow-hidden border ${theme.borderMuted} rounded-[3rem] p-8 md:p-16 flex flex-col lg:flex-row items-center lg:items-start justify-between gap-12 group`}
+            style={{
+              background: "linear-gradient(to bottom right, #16161B, #1c1c21)",
+            }}
+          >
+            {/* glossy overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent opacity-50 pointer-events-none" />
+
+            {/* left side */}
+            <div className="flex flex-col items-center lg:items-start text-center lg:text-left w-full lg:max-w-2xl relative z-10">
+              <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+                Have an idea? <br />
+                <span className={theme.contactTextAccent}>Let&apos;s build it.</span>
+              </h2>
+              <p className={`text-base md:text-lg ${theme.textMuted} leading-relaxed max-w-lg`}>
+                I&apos;m currently available for freelance work. If you have a project
+                that needs some creative touch, I&apos;d love to hear about it.
+              </p>
+            </div>
+
+            {/* right side */}
+            <div className="flex flex-col items-center lg:items-end w-full lg:w-auto gap-6 relative z-10">
+              {/* copy email button */}
+              <button
                 onClick={copyToClipboard}
+                className="group/btn relative w-full sm:w-auto min-w-[300px] flex items-center justify-between bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl p-2 pr-6 transition-all duration-300 active:scale-[0.98]"
               >
-                <div className="relative h-6 flex items-center justify-center">
+                <div className="flex items-center gap-4">
+                  <div className={`w-14 h-14 rounded-xl flex items-center justify-center transition-colors ${theme.contactIconContainer}`}>
+                    <IoIosSend className={`${theme.contactIcon} text-2xl`} />
+                  </div>
+                  <div className="flex flex-col items-start">
+                    <span className="text-xs text-gray-500 font-medium uppercase tracking-wider">
+                      Mail me at
+                    </span>
+                    <span className="text-white font-semibold text-base">
+                      {profile.email}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="relative ml-4">
                   <AnimatePresence mode="wait">
                     {copied ? (
                       <motion.div
-                        key="copied"
-                        className="flex items-center gap-2 absolute whitespace-nowrap"
-                        initial="initial"
-                        animate="animate"
-                        exit="exit"
-                        variants={textVariants}
-                        transition={{ duration: 0.2 }}
+                        key="check"
+                        initial={{ scale: 0, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        exit={{ scale: 0, opacity: 0 }}
                       >
-                        <span>Email is Copied</span>
-                        <FaCheck className="text-green-300" />
-                      </motion.div>
-                    ) : isHovered ? (
-                      <motion.div
-                        key="email"
-                        className="flex items-center gap-2 absolute whitespace-nowrap"
-                        initial="initial"
-                        animate="animate"
-                        exit="exit"
-                        variants={textVariants}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <span>{profile.email}</span>
-                        <FaCopy />
+                        <FaCheck className="text-green-400 text-xl" />
                       </motion.div>
                     ) : (
                       <motion.div
-                        key="default"
-                        className="flex items-center gap-2 absolute whitespace-nowrap"
-                        initial="initial"
-                        animate="animate"
-                        exit="exit"
-                        variants={textVariants}
-                        transition={{ duration: 0.2 }}
+                        key="copy"
+                        initial={{ scale: 0, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        exit={{ scale: 0, opacity: 0 }}
                       >
-                        <span>Let&apos;s Get in Touch</span>
-                        <IoIosSend />
+                        <FaCopy className="text-gray-500 group-hover/btn:text-white transition-colors text-xl" />
                       </motion.div>
                     )}
                   </AnimatePresence>
                 </div>
-              </HoverBorderGradient>
-            </div>
-          </motion.div>
+              </button>
 
-          {/* social links */}
-          <motion.div variants={itemVariants} className="w-full max-w-2xl">
-            <div className="flex justify-center gap-4 flex-wrap">
-              {socialLinks.map((social, index) => {
-                const Icon = social.icon;
-                return (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                  >
-                    <a
+              {/* social links row */}
+              <div className="flex items-center justify-center gap-4 mt-2">
+                {socialLinks.map((social, index) => {
+                  const Icon = social.icon;
+                  return (
+                    <motion.a
+                      key={index}
                       href={social.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="block"
+                      className={`w-14 h-14 rounded-full bg-white/5 border border-white/5 flex items-center justify-center text-gray-400 hover:text-white transition-all duration-300 ${theme.socialHover}`}
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      whileTap={{ scale: 0.9 }}
                     >
-                      <motion.div
-                        whileHover="hovered"
-                        initial="rest"
-                        animate="rest"
-                        className="group"
-                      >
-                        <HoverBorderGradient
-                          containerClassName="rounded-full"
-                          className={`flex items-center justify-center p-3 rounded-full w-10 h-10 ${theme.cardBackground} transition-all duration-300`}
-                        >
-                          <motion.div
-                            variants={{
-                              rest: { scale: 1, rotate: 0 },
-                              hovered: { scale: 1.2, rotate: 5 },
-                            }}
-                            className="text-xl"
-                            transition={{ duration: 0.3 }}
-                          >
-                            <Icon
-                              className={`${theme.text} ${theme.groupHoverText} transition-all duration-300`}
-                            />
-                          </motion.div>
-                        </HoverBorderGradient>
-                      </motion.div>
-                    </a>
-                  </motion.div>
-                );
-              })}
+                      <Icon className="text-2xl" />
+                    </motion.a>
+                  );
+                })}
+              </div>
             </div>
-          </motion.div>
+          </div>
         </motion.div>
       </div>
     </section>

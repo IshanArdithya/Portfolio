@@ -1,14 +1,109 @@
 "use client";
 
 import { useTheme } from "@/context/ThemeContext";
-import { motion, useInView, AnimatePresence } from "framer-motion";
-import { useRef, useState, useId, useCallback, memo } from "react";
+import { motion, useInView, AnimatePresence, Variants } from "framer-motion";
+import { useRef, useState, useId, useCallback, memo, useEffect } from "react";
 import { WobbleCard } from "../ui/wobble-card";
 import { interests } from "@/constants/constants";
 import Image from "next/image";
 import { useOutsideClick } from "@/hooks/use-outside-click";
 import { X } from "lucide-react";
 import { ExpandedCardProps, Interests } from "@/types";
+
+const PersonalCard = ({
+  interest,
+  index,
+  activeInterest,
+  setActiveInterest,
+  isInView,
+  id,
+  isActive,
+}: {
+  interest: Interests;
+  index: number;
+  activeInterest: Interests | null;
+  setActiveInterest: (interest: Interests) => void;
+  isInView: boolean;
+  id: string;
+  isActive: boolean;
+}) => {
+  const { theme } = useTheme();
+  const [isHovered, setIsHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) {
+      setIsHovered(isActive);
+    }
+  }, [isMobile, isActive]);
+
+  const cardVariants: Variants = {
+    rest: { y: 0 },
+    hovered: {
+      y: isMobile ? -4 : -8,
+      transition: { type: "spring", stiffness: 300, damping: 15 },
+    },
+  };
+
+  return (
+    <motion.div
+      className="h-full w-full"
+      initial={{ opacity: 0, y: 30 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+      transition={{
+        duration: 0.7,
+        type: "spring",
+        stiffness: 100,
+        delay: index * 0.1,
+      }}
+      onClick={() => setActiveInterest(interest)}
+      layoutId={`card-${interest.title}-${id}`}
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+    >
+      <motion.div
+        className="h-[250px] w-full"
+        animate={isHovered ? "hovered" : "rest"}
+        variants={cardVariants}
+      >
+        <WobbleCard
+          containerClassName="h-full relative overflow-hidden group cursor-pointer"
+          className="h-full z-10 relative"
+        >
+          <div className="max-w-xs relative z-10">
+            <h2
+              className={`text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] ${theme.text}`}
+            >
+              {interest.title}
+            </h2>
+            <p className={`mt-3 text-left text-base/6 ${theme.textMuted}`}>
+              {interest.subtitle}
+            </p>
+          </div>
+          <div className="absolute inset-0 w-full h-full">
+            <Image
+              src={interest.image || "/placeholder.svg"}
+              alt={`${interest.title} background`}
+              fill
+              className="opacity-60 mix-blend-overlay object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out filter saturate-40 brightness-55 group-hover:saturate-100 group-hover:brightness-100"
+            />
+          </div>
+        </WobbleCard>
+      </motion.div>
+    </motion.div>
+  );
+};
 
 export default function Personal() {
   const { theme } = useTheme();
@@ -24,14 +119,43 @@ export default function Personal() {
 
   useOutsideClick(cardRef, handleClose);
 
+  const [activeCardIndex, setActiveCardIndex] = useState(0);
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            if (window.innerWidth < 768) {
+              const index = Number(entry.target.getAttribute("data-index"));
+              setActiveCardIndex(index);
+            }
+          }
+        });
+      },
+      {
+        root: null,
+        threshold: 0.6,
+        rootMargin: "0px",
+      }
+    );
+
+    cardsRef.current.forEach((card) => {
+      if (card) observer.observe(card);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section
       ref={sectionRef}
-      className={`relative flex flex-col items-center justify-between px-6 py-20 overflow-hidden`}
+      className={`relative flex flex-col items-center justify-between px-6 py-10 md:py-20 overflow-hidden`}
     >
       <div className="relative w-full max-w-7xl mx-auto">
         <motion.h1
-          className="text-5xl font-bold text-center mb-16"
+          className="text-3xl md:text-5xl font-bold text-center mb-8 md:mb-16"
           initial={{ opacity: 0, y: -20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
           transition={{ duration: 0.7, type: "spring", stiffness: 100 }}
@@ -39,48 +163,26 @@ export default function Personal() {
           Personal
         </motion.h1>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-7xl mx-auto w-full">
+        <div className="flex overflow-x-auto pt-3 pb-8 -mx-6 px-6 snap-x snap-mandatory gap-6 md:grid md:grid-cols-1 lg:grid-cols-3 md:gap-6 md:pt-0 md:pb-0 md:mx-0 md:px-0 md:overflow-visible scrollbar-hide [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
           {interests.map((interest, index) => (
-            <motion.div
+            <div
               key={interest.title}
-              className={interest.span}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{
-                duration: 0.7,
-                type: "spring",
-                stiffness: 100,
-                delay: index * 0.1,
+              ref={(el) => {
+                cardsRef.current[index] = el;
               }}
-              onClick={() => setActiveInterest(interest)}
-              layoutId={`card-${interest.title}-${id}`}
+              data-index={index}
+              className={`min-w-[85vw] sm:min-w-[450px] md:min-w-0 snap-center md:snap-align-none ${interest.span}`}
             >
-              <WobbleCard
-                containerClassName={`${interest.span} relative overflow-hidden group cursor-pointer`}
-                className="h-[250px] z-10 relative"
-              >
-                <div className="max-w-xs relative z-10">
-                  <h2
-                    className={`text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] ${theme.text}`}
-                  >
-                    {interest.title}
-                  </h2>
-                  <p
-                    className={`mt-3 text-left text-base/6 ${theme.textMuted}`}
-                  >
-                    {interest.subtitle}
-                  </p>
-                </div>
-                <div className="absolute inset-0 w-full h-full">
-                  <Image
-                    src={interest.image || "/placeholder.svg"}
-                    alt={`${interest.title} background`}
-                    fill
-                    className="opacity-60 mix-blend-overlay object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out filter saturate-40 brightness-55 group-hover:saturate-100 group-hover:brightness-100"
-                  />
-                </div>
-              </WobbleCard>
-            </motion.div>
+              <PersonalCard
+                interest={interest}
+                index={index}
+                activeInterest={activeInterest}
+                setActiveInterest={setActiveInterest}
+                isInView={isInView}
+                id={id}
+                isActive={activeCardIndex === index}
+              />
+            </div>
           ))}
         </div>
       </div>

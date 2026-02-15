@@ -185,9 +185,9 @@ export default function Hero() {
     <>
       <motion.div
         ref={sectionRef}
-        className={`relative min-h-screen flex flex-col items-center justify-between px-6 pt-20 pb-10 overflow-hidden`}
+        className={`relative min-h-dvh flex flex-col items-center justify-between px-6 pt-32 pb-10 md:pt-40 md:pb-10 overflow-hidden`}
       >
-        <div className="relative w-full pt-10 md:pt-20 flex flex-col items-center justify-center max-w-7xl">
+        <div className="relative w-full flex flex-col items-center justify-center max-w-7xl">
           <div className="absolute inset-0 w-full h-full z-1 opacity-30">
             <AnimatedCircleGridPattern />
           </div>
@@ -202,14 +202,14 @@ export default function Hero() {
               animate={isInView ? "visible" : "hidden"}
             >
               <motion.h1
-                className="text-5xl md:text-6xl font-bold leading-tight tracking-tight"
+                className="text-4xl md:text-6xl font-bold leading-tight tracking-tight"
                 variants={itemVariants}
               >
                 {profile.name}
               </motion.h1>
 
               <motion.h3
-                className="mb-5 text-xl font-bold leading-tight tracking-tight"
+                className="mb-5 text-lg md:text-xl font-bold leading-tight tracking-tight"
                 variants={itemVariants}
               >
                 {profile.role}
@@ -278,7 +278,7 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.6 }}
           >
             <div className="mx-auto w-full gap-4">
-              <div className="flex flex-wrap items-center align-middle justify-between w-full gap-6">
+              <div className="grid grid-cols-2 md:flex md:flex-wrap items-center align-middle justify-between w-full gap-6">
                 {statistics.map((stat, index) => {
                   const currentDate = new Date();
                   const currentYear = currentDate.getFullYear();
