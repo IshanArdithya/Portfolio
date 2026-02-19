@@ -5,6 +5,7 @@ import ButtonOne from "@/components/ui/ButtonOne";
 import { profile, socialLinks, statistics, tags } from "@/constants/constants";
 import Marquee from "react-fast-marquee";
 import { useTheme } from "@/context/ThemeContext";
+import { Typewriter } from "react-simple-typewriter";
 import { AnimatedCircleGridPattern } from "@/components/home/GridPattern";
 import {
   motion,
@@ -203,10 +204,20 @@ export default function Hero() {
               </motion.h1>
 
               <motion.h3
-                className="mb-5 text-lg md:text-xl font-bold leading-tight tracking-tight"
+                className="mb-5 text-lg md:text-xl font-bold leading-tight tracking-tight min-h-[1.5em]"
                 variants={itemVariants}
               >
-                {profile.role}
+                <div className="inline-block text-indigo-500">
+                  <Typewriter
+                    words={profile.roles}
+                    loop={false}
+                    cursor
+                    cursorStyle="_"
+                    typeSpeed={70}
+                    deleteSpeed={50}
+                    delaySpeed={1000}
+                  />
+                </div>
               </motion.h3>
 
               <motion.p

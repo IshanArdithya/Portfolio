@@ -44,6 +44,7 @@ export const profile: Profile = {
   name: "Ishan Ardithya",
   email: "ishanardithya@gmail.com",
   role: "Full-Stack Developer",
+  roles: ["Full-Stack Developer", "Freelancer", "Software Engineer"],
   description:
     "I am a full-stack developer specializing in modern front-end frameworks like React and Next.js, and back-end technologies such as Node.js, Express.js, MongoDB, and MySQL.",
   image: "/images/profile/bangboo.gif",

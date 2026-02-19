@@ -9,6 +9,7 @@ export type Profile = {
   name: string;
   email: string;
   role: string;
+  roles: string[];
   description: string;
   image: string;
 };
