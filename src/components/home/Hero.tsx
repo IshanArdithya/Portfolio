@@ -70,16 +70,24 @@ const AnimatedButton = ({
   link: string;
   downloadFile?: string;
 }) => {
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     if (downloadFile) {
+      setIsLoading(true);
+      // simulate network validation/fetch delay
+      await new Promise((resolve) => setTimeout(resolve, 800));
+
       const a = document.createElement("a");
       a.href = downloadFile;
       a.download = downloadFile.split("/").pop() || "file";
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
+
+      setIsLoading(false);
       return;
     }
 
@@ -97,7 +105,7 @@ const AnimatedButton = ({
       transition={{ type: "spring", stiffness: 400, damping: 10 }}
       className="cursor-pointer"
     >
-      <ButtonOne text={text} link={link} onClick={handleClick} />
+      <ButtonOne text={text} link={link} onClick={handleClick} loading={isLoading} />
     </motion.div>
   );
 };
