@@ -43,7 +43,7 @@ export const navBar: NavBar[] = [
 export const profile: Profile = {
   name: "Ishan Ardithya",
   email: "ishanardithya@gmail.com",
-  role: "Software Engineer",
+  role: "Full-Stack Developer",
   description:
     "I am a full-stack developer specializing in modern front-end frameworks like React and Next.js, and back-end technologies such as Node.js, Express.js, MongoDB, and MySQL.",
   image: "/images/profile/bangboo.gif",
