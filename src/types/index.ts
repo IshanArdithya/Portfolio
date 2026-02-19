@@ -59,6 +59,7 @@ export type Project = {
   githubUrl?: string;
   url?: string;
   active?: boolean;
+  featured?: boolean;
 };
 
 export type Interests = {

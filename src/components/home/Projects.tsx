@@ -1,285 +1,14 @@
 "use client";
 
 import { useTheme } from "@/context/ThemeContext";
-import { motion, useInView, Variants } from "framer-motion";
-import { ExternalLink } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
+import { motion, useInView, Variants, AnimatePresence } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
 import { projects } from "@/constants/constants";
-import { TechIcon } from "../ui/TechIcons";
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "@/components/ui/hover-card";
-
-
-const MotionLink = motion.create(Link);
-
-const ExternalLinkButton = ({ url, text }: { url: string; text: string }) => {
-  const { theme } = useTheme();
-
-  return (
-    <MotionLink
-      href={url}
-      className={`inline-flex items-center text-sm font-medium uppercase ${theme.textAccent} ${theme.hoverText} transition-all duration-75 group relative select-none`}
-      initial="initial"
-      whileHover="buttonHover"
-    >
-      <span className="relative z-5">{text}</span>
-      <motion.div
-        className="inline-flex items-center ml-1"
-        variants={{
-          initial: { x: 0 },
-          buttonHover: { x: 2 },
-        }}
-        transition={{ type: "spring", stiffness: 400, damping: 10 }}
-      >
-        <ExternalLink className="w-[1em] h-[1em]" strokeWidth={2} />
-      </motion.div>
-    </MotionLink>
-  );
-};
-
-const ProjectCard = ({
-  project,
-  index,
-  isActive,
-}: {
-  project: (typeof projects)[0];
-  index: number;
-  isActive: boolean;
-}) => {
-  const { theme } = useTheme();
-  const [isCardHovered, setIsCardHovered] = useState(false);
-  const [activeTooltipIndex, setActiveTooltipIndex] = useState<number | null>(
-    null
-  );
-  const [isActiveTooltipOpen, setIsActiveTooltipOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  const showHover =
-    (isMobile ? isActive : isCardHovered) ||
-    activeTooltipIndex !== null ||
-    isActiveTooltipOpen;
-
-  const cardVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 12,
-      },
-    },
-  };
-
-  const innerHoverVariants: Variants = {
-    rest: {
-      y: 0,
-      boxShadow: "0 0 0 0 rgba(0, 0, 0, 0)",
-    },
-    hovered: {
-      y: isMobile ? -4 : -8,
-      boxShadow:
-        "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
-      transition: { type: "spring", stiffness: 300, damping: 15 },
-    },
-  };
-
-  const techIconVariants: Variants = {
-    hidden: { scale: 0, opacity: 0 },
-    visible: (i: number) => ({
-      scale: 1,
-      opacity: 1,
-      transition: {
-        delay: 0.1 * i,
-        type: "spring",
-        stiffness: 200,
-        damping: 10,
-      },
-    }),
-    hovered: {
-      scale: 1.1,
-      y: -2,
-      rotate: 0,
-      transition: { type: "spring", stiffness: 300, damping: 10 },
-    },
-  };
-
-  return (
-    <motion.div
-      variants={cardVariants}
-      className="relative"
-      onHoverStart={() => setIsCardHovered(true)}
-      onHoverEnd={() => setIsCardHovered(false)}
-    >
-      <motion.div
-        className={`h-full w-full rounded-lg overflow-hidden border ${theme.borderMuted} ${theme.cardBackground}`}
-        animate={showHover ? "hovered" : "rest"}
-        variants={innerHoverVariants}
-      >
-        <div className="p-6">
-          <motion.div
-            className="relative h-[200px] mb-4 rounded-lg overflow-hidden"
-            whileHover={{ scale: 1.03 }}
-            transition={{ type: "spring", stiffness: 300, damping: 15 }}
-          >
-            <Image
-              src={project.image || "/images/projects/placeholder.webp"}
-              alt={project.name}
-              fill
-              className="object-cover transition-transform duration-500 hover:scale-110"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
-          </motion.div>
-
-          <div className="flex flex-col gap-2 mb-4">
-            <motion.div
-              initial={{ opacity: 0, y: 5 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 * index, duration: 0.4 }}
-            >
-              <span
-                className={`text-[10px] font-bold uppercase tracking-widest ${theme.textAccent}`}
-              >
-                #{project.category}
-              </span>
-            </motion.div>
-
-            <div className="flex flex-wrap items-center gap-3">
-              <motion.h3
-                className="text-xl font-bold leading-none"
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2 * index, duration: 0.5 }}
-              >
-                {project.name}
-              </motion.h3>
-
-              {project.active && (
-                <HoverCard
-                  openDelay={200}
-                  closeDelay={200}
-                  onOpenChange={setIsActiveTooltipOpen}
-                >
-                  <HoverCardTrigger asChild>
-                    <div className="flex items-center gap-2 h-5 px-2 rounded-full bg-black/60 backdrop-blur-md border border-white/10 cursor-help select-none">
-                      <span className="relative flex h-1.5 w-1.5">
-                        <span
-                          className={`animate-ping absolute inline-flex h-full w-full rounded-full ${theme.backgroundAccent} opacity-75`}
-                        ></span>
-                        <span
-                          className={`relative inline-flex rounded-full h-1.5 w-1.5 ${theme.backgroundAccent}`}
-                        ></span>
-                      </span>
-                      <span className="text-[9px] font-medium text-white tracking-wider uppercase">
-                        Active
-                      </span>
-                    </div>
-                  </HoverCardTrigger>
-                  <HoverCardContent
-                    className={`w-auto px-4 py-3 ${theme.navBackground} ${theme.borderMuted} ${theme.text} select-none`}
-                    side="top"
-                    align="center"
-                    sideOffset={5}
-                  >
-                    <div className="space-y-1">
-                      {/*<h4 className="text-xs font-semibold uppercase tracking-wider">
-                        Status
-                      </h4>*/}
-                      <p className={`text-xs ${theme.textMuted}`}>
-                        Project being actively developed
-                      </p>
-                    </div>
-                  </HoverCardContent>
-                </HoverCard>
-              )}
-            </div>
-
-            <div className="flex flex-wrap gap-2 mt-2">
-              {project.technologies.map((tech, i) => (
-                <motion.div
-                  key={i}
-                  custom={i}
-                  variants={techIconVariants}
-                  initial="hidden"
-                  animate="visible"
-                  transition={{
-                    type: "spring",
-                    stiffness: 300,
-                    damping: 10,
-                  }}
-                >
-                  <motion.div
-                    animate={
-                      activeTooltipIndex === i
-                        ? { scale: 1.2, rotate: 5 }
-                        : undefined
-                    }
-                    whileHover={{ scale: 1.2, rotate: 5 }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 300,
-                      damping: 10,
-                    }}
-                  >
-                    <TechIcon
-                      type={tech}
-                      onOpenChange={(open) =>
-                        setActiveTooltipIndex(open ? i : null)
-                      }
-                    />
-                  </motion.div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          <motion.p
-            className={`text-sm ${theme.textMuted} mb-4 line-clamp-3`}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 * index, duration: 0.5 }}
-          >
-            {project.description}
-          </motion.p>
-
-          <motion.div
-            className="flex items-center space-x-4"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 * index, duration: 0.5 }}
-          >
-            {project.githubUrl && (
-              <ExternalLinkButton url={project.githubUrl} text="Github" />
-            )}
-
-            {project.url && (
-              <ExternalLinkButton url={project.url} text="Visit Website" />
-            )}
-          </motion.div>
-        </div>
-      </motion.div>
-    </motion.div>
-  );
-};
+import { ProjectCard } from "@/components/ui/ProjectCard";
 
 export default function Projects() {
+  const { theme } = useTheme();
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: false, amount: 0.1 });
 
@@ -296,6 +25,37 @@ export default function Projects() {
 
   const [activeCardIndex, setActiveCardIndex] = useState(0);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const carouselRef = useRef<HTMLDivElement>(null);
+
+  const sortedProjects = [...projects].sort((a, b) => {
+    if (a.featured && !b.featured) return -1;
+    if (!a.featured && b.featured) return 1;
+    return 0;
+  });
+
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  const checkScroll = () => {
+    if (carouselRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
+      setCanScrollLeft(scrollLeft > 10);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+    }
+  };
+
+  useEffect(() => {
+    const carousel = carouselRef.current;
+    if (carousel) {
+      carousel.addEventListener("scroll", checkScroll);
+      checkScroll();
+      window.addEventListener("resize", checkScroll);
+    }
+    return () => {
+      carousel?.removeEventListener("scroll", checkScroll);
+      window.removeEventListener("resize", checkScroll);
+    };
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -323,40 +83,110 @@ export default function Projects() {
     return () => observer.disconnect();
   }, []);
 
+  const scrollCarousel = (direction: "left" | "right") => {
+    if (carouselRef.current) {
+      const scrollAmount = carouselRef.current.clientWidth / 3;
+      const targetScroll =
+        carouselRef.current.scrollLeft +
+        (direction === "left" ? -scrollAmount : scrollAmount);
+
+      carouselRef.current.scrollTo({
+        left: targetScroll,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <section
       ref={sectionRef}
       className={`relative flex flex-col items-center justify-between px-6 py-10 md:py-20 overflow-hidden`}
     >
       <div className="relative w-full max-w-7xl mx-auto">
-        <motion.h1
-          className="text-3xl md:text-5xl font-bold text-center mb-8 md:mb-16"
-          initial={{ opacity: 0, y: -20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
-          transition={{ duration: 0.7, type: "spring", stiffness: 100 }}
-        >
-          Projects
-        </motion.h1>
+        {/* header */}
+        <div className="flex flex-col items-center justify-center mb-8 md:mb-16 gap-4">
+          <motion.h1
+            className="text-3xl md:text-5xl font-bold text-center"
+            initial={{ opacity: 0, y: -20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
+            transition={{ duration: 0.7, type: "spring", stiffness: 100 }}
+          >
+            Projects
+          </motion.h1>
+        </div>
 
-        <motion.div
-          className="flex overflow-x-auto pt-3 md:pt-0 -mx-6 px-6 snap-x snap-mandatory gap-6 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-8 md:mx-0 md:px-0 md:overflow-visible [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-        >
-          {projects.map((project, index) => (
-            <div
-              key={index}
-              ref={(el) => {
-                cardsRef.current[index] = el;
-              }}
-              data-index={index}
-              className="min-w-[85vw] sm:min-w-[450px] md:min-w-0 snap-center md:snap-align-none"
-            >
-              <ProjectCard project={project} index={index} isActive={activeCardIndex === index} />
+        {/* carousel container with side nav */}
+        <div className="relative group">
+          {/* desktop nav buttons */}
+          <div className="hidden md:block pointer-events-none absolute inset-0 z-20 overflow-visible h-full">
+
+            {/* left button */}
+            <div className="absolute left-4 xl:-left-12 top-1/2 -translate-y-1/2 z-30 pointer-events-auto">
+              <AnimatePresence>
+                {canScrollLeft && (
+                  <motion.button
+                    initial={{ opacity: 0, x: 20, scale: 0.8 }}
+                    animate={{ opacity: 1, x: 0, scale: 1 }}
+                    exit={{ opacity: 0, x: 10, scale: 0.8 }}
+                    transition={{ duration: 0.3 }}
+                    onClick={() => scrollCarousel("left")}
+                    className={`p-3 rounded-full border border-white/10 bg-black/50 backdrop-blur-md text-white shadow-lg hover:bg-indigo-500/20 hover:border-indigo-500/50 transition-colors duration-300`}
+                    aria-label="Previous projects"
+                  >
+                    <ChevronLeft className="w-6 h-6" />
+                  </motion.button>
+                )}
+              </AnimatePresence>
             </div>
-          ))}
-        </motion.div>
+
+            {/* right button */}
+            <div className="absolute right-4 xl:-right-12 top-1/2 -translate-y-1/2 z-30 pointer-events-auto">
+              <AnimatePresence>
+                {canScrollRight && (
+                  <motion.button
+                    initial={{ opacity: 0, x: -20, scale: 0.8 }}
+                    animate={{ opacity: 1, x: 0, scale: 1 }}
+                    exit={{ opacity: 0, x: -10, scale: 0.8 }}
+                    transition={{ duration: 0.3 }}
+                    onClick={() => scrollCarousel("right")}
+                    className={`p-3 rounded-full border border-white/10 bg-black/50 backdrop-blur-md text-white shadow-lg hover:bg-indigo-500/20 hover:border-indigo-500/50 transition-colors duration-300`}
+                    aria-label="Next projects"
+                  >
+                    <ChevronRight className="w-6 h-6" />
+                  </motion.button>
+                )}
+              </AnimatePresence>
+            </div>
+          </div>
+
+          {/* projects grid/carousel */}
+          <motion.div
+            ref={carouselRef}
+            className="flex overflow-x-auto pt-3 md:pt-4 md:-mt-4 -mx-6 px-6 snap-x snap-mandatory gap-6 
+            md:grid md:grid-rows-2 md:grid-flow-col md:auto-cols-[minmax(calc(33.333%-1.33333rem),1fr)] md:gap-8 md:mx-0 md:px-0 md:overflow-x-auto md:snap-mandatory 
+            [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] pb-4"
+            variants={containerVariants}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+          >
+            {sortedProjects.map((project, index) => (
+              <div
+                key={index}
+                ref={(el) => {
+                  cardsRef.current[index] = el;
+                }}
+                data-index={index}
+                className="min-w-[85vw] sm:min-w-[450px] md:min-w-0 snap-center md:snap-start h-full"
+              >
+                <ProjectCard
+                  project={project}
+                  index={index}
+                  isActive={activeCardIndex === index}
+                />
+              </div>
+            ))}
+          </motion.div>
+        </div>
       </div>
     </section>
   );
