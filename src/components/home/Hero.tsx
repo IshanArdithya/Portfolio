@@ -14,6 +14,7 @@ import {
   Variants,
 } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { smoothScrollTo } from "@/lib/utils";
 
 const AnimatedCounter = ({
   value,
@@ -83,14 +84,7 @@ const AnimatedButton = ({
 
     if (link.startsWith("#")) {
       const targetId = link.substring(1);
-      const targetElement = document.getElementById(targetId);
-
-      if (targetElement) {
-        window.scrollTo({
-          top: targetElement.offsetTop - 100,
-          behavior: "smooth",
-        });
-      }
+      smoothScrollTo(targetId, 1000);
     } else {
       window.location.href = link;
     }
