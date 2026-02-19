@@ -52,10 +52,11 @@ export const profile: Profile = {
 export const tags: Tags = [
   "React",
   "Next.js",
-  "Express.js",
+  "TypeScript",
   "Node.js",
+  "PostgreSQL",
+  "MongoDB",
   "TailwindCSS",
-  "PHP",
 ];
 
 export const statistics: Statistic[] = [
