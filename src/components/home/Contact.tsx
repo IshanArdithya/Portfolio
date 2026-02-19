@@ -117,17 +117,17 @@ export default function Contact() {
               {/* copy email button */}
               <button
                 onClick={copyToClipboard}
-                className="group/btn relative w-full sm:w-auto min-w-[300px] flex items-center justify-between bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl p-2 pr-6 transition-all duration-300 active:scale-[0.98]"
+                className="group/btn relative w-full sm:w-auto min-w-[300px] flex items-center justify-between bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl p-1.5 pr-4 md:p-2 md:pr-6 transition-all duration-300 active:scale-[0.98]"
               >
-                <div className="flex items-center gap-4">
-                  <div className={`w-14 h-14 rounded-xl flex items-center justify-center transition-colors ${theme.contactIconContainer}`}>
-                    <IoIosSend className={`${theme.contactIcon} text-2xl`} />
+                <div className="flex items-center gap-3 md:gap-4">
+                  <div className={`w-10 h-10 md:w-14 md:h-14 rounded-xl flex items-center justify-center transition-colors ${theme.contactIconContainer}`}>
+                    <IoIosSend className={`${theme.contactIcon} text-lg md:text-2xl`} />
                   </div>
                   <div className="flex flex-col items-start">
-                    <span className="text-xs text-gray-500 font-medium uppercase tracking-wider">
+                    <span className="text-[10px] md:text-xs text-gray-500 font-medium uppercase tracking-wider">
                       Mail me at
                     </span>
-                    <span className="text-white font-semibold text-base">
+                    <span className="text-white font-semibold text-sm md:text-base">
                       {profile.email}
                     </span>
                   </div>
@@ -142,7 +142,7 @@ export default function Contact() {
                         animate={{ scale: 1, opacity: 1 }}
                         exit={{ scale: 0, opacity: 0 }}
                       >
-                        <FaCheck className="text-green-400 text-xl" />
+                        <FaCheck className="text-green-400 text-lg md:text-xl" />
                       </motion.div>
                     ) : (
                       <motion.div
@@ -151,7 +151,7 @@ export default function Contact() {
                         animate={{ scale: 1, opacity: 1 }}
                         exit={{ scale: 0, opacity: 0 }}
                       >
-                        <FaCopy className="text-gray-500 group-hover/btn:text-white transition-colors text-xl" />
+                        <FaCopy className="text-gray-500 group-hover/btn:text-white transition-colors text-lg md:text-xl" />
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -159,7 +159,7 @@ export default function Contact() {
               </button>
 
               {/* social links row */}
-              <div className="flex items-center justify-center gap-4 mt-2">
+              <div className="flex items-center justify-center gap-3 md:gap-4 mt-2">
                 {socialLinks.map((social, index) => {
                   const Icon = social.icon;
                   return (
@@ -168,11 +168,11 @@ export default function Contact() {
                       href={social.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`w-14 h-14 rounded-full bg-white/5 border border-white/5 flex items-center justify-center text-gray-400 hover:text-white transition-all duration-300 ${theme.socialHover}`}
+                      className={`w-10 h-10 md:w-14 md:h-14 rounded-full bg-white/5 border border-white/5 flex items-center justify-center text-gray-400 hover:text-white transition-all duration-300 ${theme.socialHover}`}
                       whileHover={{ scale: 1.1, rotate: 5 }}
                       whileTap={{ scale: 0.9 }}
                     >
-                      <Icon className="text-2xl" />
+                      <Icon className="text-lg md:text-2xl" />
                     </motion.a>
                   );
                 })}
