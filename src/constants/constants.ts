@@ -43,7 +43,8 @@ export const navBar: NavBar[] = [
 export const profile: Profile = {
   name: "Ishan Ardithya",
   email: "ishanardithya@gmail.com",
-  role: "Software Engineer",
+  role: "Full-Stack Developer",
+  roles: ["Full-Stack Developer", "Software Engineer"],
   description:
     "I am a full-stack developer specializing in modern front-end frameworks like React and Next.js, and back-end technologies such as Node.js, Express.js, MongoDB, and MySQL.",
   image: "/images/profile/bangboo.gif",
@@ -52,10 +53,11 @@ export const profile: Profile = {
 export const tags: Tags = [
   "React",
   "Next.js",
-  "Express.js",
+  "TypeScript",
   "Node.js",
+  "PostgreSQL",
+  "MongoDB",
   "TailwindCSS",
-  "PHP",
 ];
 
 export const statistics: Statistic[] = [
@@ -250,6 +252,7 @@ export const projects: Project[] = [
     technologies: ["next", "tailwind", "express", "typescript"],
     githubUrl: "https://github.com/IshanArdithya/NextuneLK",
     url: "https://www.nextunelk.com/",
+    active: true,
   },
   {
     name: "WebForge",

@@ -14,6 +14,8 @@ import {
   NavbarLogo,
 } from "@/components/ui/navbar";
 
+import { smoothScrollTo } from "@/lib/utils";
+
 export default function Header() {
   const { theme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -39,13 +41,9 @@ export default function Header() {
 
     if (href.startsWith("#")) {
       const targetId = href.substring(1);
-      const targetElement = document.getElementById(targetId);
 
-      if (targetElement) {
-        window.scrollTo({
-          top: targetElement.offsetTop - 100, // offset for navbar height
-          behavior: "smooth",
-        });
+      if (document.getElementById(targetId)) {
+        smoothScrollTo(targetId, 1000);
         setActiveSection(targetId);
 
         if (isMenuOpen) {
@@ -53,10 +51,7 @@ export default function Header() {
         }
       }
     } else if (href === "/") {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
+      smoothScrollTo("home", 1000);
       setActiveSection("home");
 
       if (isMenuOpen) {
@@ -121,9 +116,8 @@ export default function Header() {
             <a
               key={index}
               href={item.link}
-              className={`w-full px-4 py-2 text-lg font-medium ${
-                item.active ? theme.textAccent : theme.text
-              } ${theme.hoverText}`}
+              className={`w-full px-4 py-2 text-lg font-medium ${item.active ? theme.textAccent : theme.text
+                } ${theme.hoverText}`}
               onClick={(e) => handleNavItemClick(e, item.link)}
             >
               {item.name}

@@ -9,6 +9,7 @@ export type Profile = {
   name: string;
   email: string;
   role: string;
+  roles: string[];
   description: string;
   image: string;
 };
@@ -58,6 +59,8 @@ export type Project = {
   technologies: string[];
   githubUrl?: string;
   url?: string;
+  active?: boolean;
+  featured?: boolean;
 };
 
 export type Interests = {

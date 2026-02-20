@@ -44,6 +44,21 @@ export interface Theme {
 
   gradientFrom: string;
   gradientTo: string;
+
+  scrollbarThumb: string;
+  scrollbarHover: string;
+  scrollbarTrack: string;
+
+  // exp section
+  dateText: string;
+  tagBase: string;
+  divider: string;
+
+  // contact section
+  contactTextAccent: string;
+  contactIconContainer: string;
+  contactIcon: string;
+  socialHover: string;
 }
 
 export const themes: Record<ThemeKey, Theme> = {
@@ -55,7 +70,7 @@ export const themes: Record<ThemeKey, Theme> = {
     neutral: "slate-800",
 
     // background
-    background: "bg-[rgb(28,28,34)]/100", // bg-[#121212]
+    background: "bg-[rgb(28,28,34)]", // bg-[#121212]
     backgroundAlt: "bg-slate-800",
     backgroundAccent: "bg-indigo-500",
 
@@ -98,5 +113,23 @@ export const themes: Record<ThemeKey, Theme> = {
     // gradients
     gradientFrom: "from-indigo-500/10",
     gradientTo: "to-[rgb(22,22,29)]/10",
+
+    // scrollbar
+    scrollbarThumb: "#6366f1", // indigo-500
+    scrollbarHover: "#4f46e5", // indigo-600
+    scrollbarTrack: "#151518",
+
+    // experience section
+    dateText: "text-indigo-300/80",
+    tagBase:
+      "bg-indigo-900/20 border border-indigo-500/20 text-indigo-200 hover:bg-indigo-900/30",
+    divider:
+      "bg-gradient-to-r from-transparent via-indigo-500/30 to-transparent",
+
+    // contact section
+    contactTextAccent: "text-indigo-400",
+    contactIconContainer: "bg-indigo-500/10 group-hover/btn:bg-indigo-500/20",
+    contactIcon: "text-indigo-400",
+    socialHover: "hover:bg-indigo-500/20 hover:border-indigo-500/30",
   },
 };

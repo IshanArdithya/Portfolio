@@ -5,6 +5,7 @@ import ButtonOne from "@/components/ui/ButtonOne";
 import { profile, socialLinks, statistics, tags } from "@/constants/constants";
 import Marquee from "react-fast-marquee";
 import { useTheme } from "@/context/ThemeContext";
+import { Typewriter } from "react-simple-typewriter";
 import { AnimatedCircleGridPattern } from "@/components/home/GridPattern";
 import {
   motion,
@@ -14,6 +15,7 @@ import {
   Variants,
 } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { smoothScrollTo } from "@/lib/utils";
 
 const AnimatedCounter = ({
   value,
@@ -68,29 +70,30 @@ const AnimatedButton = ({
   link: string;
   downloadFile?: string;
 }) => {
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     if (downloadFile) {
+      setIsLoading(true);
+      // simulate network validation/fetch delay
+      await new Promise((resolve) => setTimeout(resolve, 800));
+
       const a = document.createElement("a");
       a.href = downloadFile;
       a.download = downloadFile.split("/").pop() || "file";
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
+
+      setIsLoading(false);
       return;
     }
 
     if (link.startsWith("#")) {
       const targetId = link.substring(1);
-      const targetElement = document.getElementById(targetId);
-
-      if (targetElement) {
-        window.scrollTo({
-          top: targetElement.offsetTop - 100,
-          behavior: "smooth",
-        });
-      }
+      smoothScrollTo(targetId, 1000);
     } else {
       window.location.href = link;
     }
@@ -102,7 +105,7 @@ const AnimatedButton = ({
       transition={{ type: "spring", stiffness: 400, damping: 10 }}
       className="cursor-pointer"
     >
-      <ButtonOne text={text} link={link} onClick={handleClick} />
+      <ButtonOne text={text} link={link} onClick={handleClick} loading={isLoading} />
     </motion.div>
   );
 };
@@ -185,9 +188,9 @@ export default function Hero() {
     <>
       <motion.div
         ref={sectionRef}
-        className={`relative min-h-screen flex flex-col items-center justify-between px-6 pt-20 pb-10 overflow-hidden`}
+        className={`relative min-h-dvh flex flex-col items-center justify-between px-6 pt-32 pb-10 md:pt-40 md:pb-10 overflow-hidden`}
       >
-        <div className="relative w-full pt-10 md:pt-20 flex flex-col items-center justify-center max-w-7xl">
+        <div className="relative w-full flex flex-col items-center justify-center max-w-7xl">
           <div className="absolute inset-0 w-full h-full z-1 opacity-30">
             <AnimatedCircleGridPattern />
           </div>
@@ -202,17 +205,27 @@ export default function Hero() {
               animate={isInView ? "visible" : "hidden"}
             >
               <motion.h1
-                className="text-5xl md:text-6xl font-bold leading-tight tracking-tight"
+                className="text-4xl md:text-6xl font-bold leading-tight tracking-tight"
                 variants={itemVariants}
               >
                 {profile.name}
               </motion.h1>
 
               <motion.h3
-                className="mb-5 text-xl font-bold leading-tight tracking-tight"
+                className="mb-5 text-lg md:text-xl font-bold leading-tight tracking-tight min-h-[1.5em]"
                 variants={itemVariants}
               >
-                {profile.role}
+                <div className="inline-block text-indigo-500">
+                  <Typewriter
+                    words={profile.roles}
+                    loop={false}
+                    cursor
+                    cursorStyle="_"
+                    typeSpeed={70}
+                    deleteSpeed={50}
+                    delaySpeed={1000}
+                  />
+                </div>
               </motion.h3>
 
               <motion.p
@@ -278,7 +291,7 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.6 }}
           >
             <div className="mx-auto w-full gap-4">
-              <div className="flex flex-wrap items-center align-middle justify-between w-full gap-6">
+              <div className="grid grid-cols-2 md:flex md:flex-wrap items-center align-middle justify-between w-full gap-6">
                 {statistics.map((stat, index) => {
                   const currentDate = new Date();
                   const currentYear = currentDate.getFullYear();

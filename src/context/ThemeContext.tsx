@@ -15,6 +15,12 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [themeKey, setThemeKey] = useState<ThemeKey>("indigo");
   const theme = themes[themeKey];
 
+  if (typeof document !== "undefined") {
+    document.documentElement.style.setProperty("--scrollbar-thumb", theme.scrollbarThumb);
+    document.documentElement.style.setProperty("--scrollbar-thumb-hover", theme.scrollbarHover);
+    document.documentElement.style.setProperty("--scrollbar-track", theme.scrollbarTrack);
+  }
+
   return (
     <ThemeContext.Provider value={{ themeKey, theme, setTheme: setThemeKey }}>
       {children}
