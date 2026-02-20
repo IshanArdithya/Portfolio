@@ -215,7 +215,7 @@ export default function Hero() {
                 className="mb-5 text-lg md:text-xl font-bold leading-tight tracking-tight min-h-[1.5em]"
                 variants={itemVariants}
               >
-                <div className="inline-block text-indigo-500">
+                <div className={`inline-block ${theme.textAccent}`}>
                   <Typewriter
                     words={profile.roles}
                     loop={false}
