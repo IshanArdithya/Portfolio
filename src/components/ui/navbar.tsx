@@ -73,14 +73,26 @@ export const Navbar = ({ children, className }: NavbarProps) => {
   return (
     <motion.div
       ref={ref}
-      className={cn("sticky inset-x-0 top-20 z-40 w-full", className)}
+      className={cn(
+        "sticky inset-x-0 top-20 z-40 w-full animate-[navbar-drop_1s_cubic-bezier(0.76,0,0.24,1)_forwards]",
+        className
+      )}
     >
+      <style>
+        {`
+            @keyframes navbar-drop {
+                0% { transform: translateY(-150px); opacity: 0; }
+                50% { opacity: 1; }
+                100% { transform: translateY(0); opacity: 1; }
+            }
+        `}
+      </style>
       {React.Children.map(children, (child) =>
         React.isValidElement(child)
           ? React.cloneElement(
-              child as React.ReactElement<{ visible?: boolean }>,
-              { visible }
-            )
+            child as React.ReactElement<{ visible?: boolean }>,
+            { visible }
+          )
           : child
       )}
     </motion.div>
@@ -292,9 +304,9 @@ export const NavbarButton = ({
   className?: string;
   variant?: "primary" | "secondary" | "dark" | "gradient";
 } & (
-  | React.ComponentPropsWithoutRef<"a">
-  | React.ComponentPropsWithoutRef<"button">
-)) => {
+    | React.ComponentPropsWithoutRef<"a">
+    | React.ComponentPropsWithoutRef<"button">
+  )) => {
   const { theme } = useTheme();
 
   const baseStyles =
