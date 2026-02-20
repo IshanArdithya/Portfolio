@@ -9,6 +9,7 @@ export interface Theme {
   background: string;
   backgroundAlt: string;
   backgroundAccent: string;
+  backgroundAccentStinger: string;
 
   text: string;
   textMuted: string;
@@ -73,6 +74,7 @@ export const themes: Record<ThemeKey, Theme> = {
     background: "bg-[rgb(28,28,34)]", // bg-[#121212]
     backgroundAlt: "bg-slate-800",
     backgroundAccent: "bg-indigo-500",
+    backgroundAccentStinger: "bg-indigo-600",
 
     // text
     text: "text-white",
