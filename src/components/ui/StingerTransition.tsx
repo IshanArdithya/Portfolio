@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTheme } from "@/context/ThemeContext";
 
 export default function StingerTransition() {
     const [isVisible, setIsVisible] = useState(true);
+    const { theme } = useTheme();
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -29,7 +31,7 @@ export default function StingerTransition() {
             {Array.from({ length: bars }).map((_, i) => (
                 <div
                     key={i}
-                    className="relative h-full w-full bg-indigo-600"
+                    className={`relative h-full w-full ${theme.backgroundAccentStinger}`}
                     style={{
                         width: `${100 / bars}vw`,
                         animation: `stinger-slide 0.8s cubic-bezier(0.76, 0, 0.24, 1) forwards`,
