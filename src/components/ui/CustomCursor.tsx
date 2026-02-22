@@ -46,7 +46,7 @@ export default function CustomCursor() {
             const dx = e.clientX - mouse.x;
             const dy = e.clientY - mouse.y;
             const distance = Math.sqrt(dx * dx + dy * dy);
-            if (distance > 50) {
+            if (distance > 100) { // teleport without trail if cursor jumps
                 for (let i = 0; i < numPoints; i++) {
                     points[i].x = e.clientX;
                     points[i].y = e.clientY;
