@@ -206,4 +206,20 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
+  .dark-modal-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .dark-modal-scrollbar::-webkit-scrollbar-track {
+    background: #121212;
+    border-radius: 8px;
+  }
+  .dark-modal-scrollbar::-webkit-scrollbar-thumb {
+    background: #333333;
+    border-radius: 9999px;
+  }
+  .dark-modal-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #444444;
+  }
 }
