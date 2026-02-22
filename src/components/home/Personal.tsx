@@ -205,6 +205,14 @@ export default function Personal() {
 
 const ExpandedCard = memo<ExpandedCardProps>(
   ({ interest, onClose, cardRef, id, theme }) => {
+    useEffect(() => {
+      document.body.style.overflow = "clip";
+
+      return () => {
+        document.body.style.overflow = "";
+      };
+    }, []);
+
     return (
       <>
         <motion.div
@@ -218,7 +226,7 @@ const ExpandedCard = memo<ExpandedCardProps>(
           <motion.div
             layoutId={`card-${interest.title}-${id}`}
             ref={cardRef}
-            className={`w-full max-w-[800px] h-auto max-h-[90vh] ${theme.exCardBackground} rounded-lg overflow-hidden pointer-events-auto`}
+            className={`w-full max-w-[800px] h-auto max-h-[90vh] md:max-h-[85vh] flex flex-col ${theme.exCardBackground} rounded-lg overflow-hidden pointer-events-auto`}
             transition={{
               type: "spring",
               damping: 30,
@@ -226,7 +234,7 @@ const ExpandedCard = memo<ExpandedCardProps>(
               duration: 0.4,
             }}
           >
-            <div className={`relative p-8 pb-0 ${theme.text}`}>
+            <div className={`relative p-8 pb-0 shrink-0 ${theme.text}`}>
               <motion.button
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 0.8 }}
@@ -251,7 +259,7 @@ const ExpandedCard = memo<ExpandedCardProps>(
               </div>
             </div>
 
-            <div className="p-8 pt-6">
+            <div className="p-8 pt-6 flex-1 overflow-y-auto dark-modal-scrollbar min-h-0">
               <div
                 className={`${theme.exCardSecondaryBackground} rounded-lg p-6 text-base leading-relaxed`}
               >

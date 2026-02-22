@@ -47,7 +47,7 @@ export const profile: Profile = {
   roles: ["Full-Stack Developer", "Software Engineer"],
   description:
     "I am a full-stack developer specializing in modern front-end frameworks like React and Next.js, and back-end technologies such as Node.js, Express.js, MongoDB, and MySQL.",
-  image: "/images/profile/bangboo.gif",
+  image: "/images/profile/image.webp",
 };
 
 export const tags: Tags = [

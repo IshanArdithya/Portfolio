@@ -117,7 +117,7 @@ export default function Contact() {
               {/* copy email button */}
               <button
                 onClick={copyToClipboard}
-                className="group/btn relative w-full sm:w-auto min-w-[300px] flex items-center justify-between bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl p-1.5 pr-4 md:p-2 md:pr-6 transition-all duration-300 active:scale-[0.98]"
+                className="group/btn relative w-full sm:w-auto min-w-[300px] flex items-center justify-between bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl p-1.5 pr-4 md:p-2 md:pr-6 transition-all duration-300 active:scale-[0.98] cursor-pointer"
               >
                 <div className="flex items-center gap-3 md:gap-4">
                   <div className={`w-10 h-10 md:w-14 md:h-14 rounded-xl flex items-center justify-center transition-colors ${theme.contactIconContainer}`}>

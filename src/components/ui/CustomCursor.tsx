@@ -1,12 +1,26 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function CustomCursor() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
+    const [isMobile, setIsMobile] = useState(true);
 
     useEffect(() => {
-        if (window.matchMedia("(pointer: coarse)").matches) return;
+        const checkMobile = () => {
+            const isTouch = window.matchMedia("(pointer: coarse)").matches;
+            const isSmallScreen = window.innerWidth <= 768;
+            setIsMobile(isTouch || isSmallScreen);
+        };
+
+        checkMobile();
+        window.addEventListener("resize", checkMobile);
+
+        return () => window.removeEventListener("resize", checkMobile);
+    }, []);
+
+    useEffect(() => {
+        if (isMobile) return;
 
         const canvas = canvasRef.current;
         if (!canvas) return;
@@ -32,7 +46,7 @@ export default function CustomCursor() {
             const dx = e.clientX - mouse.x;
             const dy = e.clientY - mouse.y;
             const distance = Math.sqrt(dx * dx + dy * dy);
-            if (distance > 50) {
+            if (distance > 100) { // teleport without trail if cursor jumps
                 for (let i = 0; i < numPoints; i++) {
                     points[i].x = e.clientX;
                     points[i].y = e.clientY;
@@ -101,12 +115,14 @@ export default function CustomCursor() {
             window.removeEventListener("mouseover", handleMouseOver);
             cancelAnimationFrame(animationFrameId);
         };
-    }, []);
+    }, [isMobile]);
+
+    if (isMobile) return null;
 
     return (
         <canvas
             ref={canvasRef}
-            className="fixed inset-0 z-9999 pointer-events-none"
+            className="fixed inset-0 z-9999 pointer-events-none hidden md:block"
             style={{ zIndex: 999999 }}
         />
     );
