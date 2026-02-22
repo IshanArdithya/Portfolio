@@ -77,7 +77,7 @@ const AnimatedButton = ({
 
     if (downloadFile) {
       setIsLoading(true);
-      // simulate network validation/fetch delay
+      // simulate net validation/fetch delay
       await new Promise((resolve) => setTimeout(resolve, 800));
 
       const a = document.createElement("a");
@@ -110,7 +110,8 @@ const AnimatedButton = ({
   );
 };
 
-const FloatingImage = ({ src, alt }: { src: string; alt: string }) => {
+const FloatingImage = ({ src, alt, isInView }: { src: string; alt: string; isInView: boolean }) => {
+  const { theme } = useTheme();
   const y = useMotionValue(0);
 
   useAnimationFrame((t) => {
@@ -120,22 +121,62 @@ const FloatingImage = ({ src, alt }: { src: string; alt: string }) => {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
+      animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
       transition={{
         duration: 0.8,
         delay: 0.2,
         ease: [0, 0.71, 0.2, 1.01],
       }}
       style={{ y }}
-      className="relative"
+      className="relative flex items-center justify-center p-5 md:p-7"
     >
+      {/* outer ring */}
+      <motion.svg
+        className={`absolute inset-2.5 md:inset-3 w-[calc(100%-1.25rem)] md:w-[calc(100%-1.5rem)] h-[calc(100%-1.25rem)] md:h-[calc(100%-1.5rem)] opacity-50 pointer-events-none ${theme.textAccent}`}
+        viewBox="0 0 100 100"
+        style={{ overflow: "visible" }}
+        animate={{ rotate: 360 }}
+        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+      >
+        <circle
+          cx="50"
+          cy="50"
+          r="49"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeDasharray="8 6" // dash length, gap length
+          vectorEffect="non-scaling-stroke"
+        />
+      </motion.svg>
+
+      {/* inner ring */}
+      <motion.svg
+        className={`absolute inset-3 md:inset-4 w-[calc(100%-1.5rem)] md:w-[calc(100%-2rem)] h-[calc(100%-1.5rem)] md:h-[calc(100%-2rem)] opacity-40 pointer-events-none ${theme.textAccent}`}
+        viewBox="0 0 100 100"
+        style={{ overflow: "visible" }}
+        animate={{ rotate: -360 }}
+        transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
+      >
+        <circle
+          cx="50"
+          cy="50"
+          r="48"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeDasharray="2 5"
+          vectorEffect="non-scaling-stroke"
+        />
+      </motion.svg>
+
       <Image
         src={src || "/placeholder.svg"}
         alt={alt}
         width={600}
         height={600}
         unoptimized // added because the image is a gif
-        className="w-full max-w-sm rounded-full shadow-2xl object-cover"
+        className="w-full max-w-sm rounded-full shadow-2xl object-cover relative z-10 brightness-[0.90] hover:brightness-100 transition-all duration-500"
       />
     </motion.div>
   );
@@ -279,7 +320,7 @@ export default function Hero() {
 
             {/* right section */}
             <div className="flex justify-center relative order-1 md:order-2">
-              <FloatingImage src={profile.image} alt="Profile Photo" />
+              <FloatingImage src={profile.image} alt="Profile Photo" isInView={isInView} />
             </div>
           </div>
 
