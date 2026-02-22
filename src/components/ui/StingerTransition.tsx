@@ -39,7 +39,10 @@ export default function StingerTransition() {
     const bars = 5;
 
     return (
-        <div className="fixed inset-0 z-100 pointer-events-none flex w-screen h-screen overflow-hidden">
+        <div
+            className="fixed inset-0 pointer-events-none flex w-screen h-screen overflow-hidden"
+            style={{ zIndex: 9999999 }}
+        >
             <style>
                 {`
                     @keyframes stinger-slide {
