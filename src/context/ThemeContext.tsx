@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import { ThemeKey, themes } from "@/lib/themes";
 
 type ThemeContextType = {
@@ -15,11 +15,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [themeKey, setThemeKey] = useState<ThemeKey>("indigo");
   const theme = themes[themeKey];
 
-  if (typeof document !== "undefined") {
+  useEffect(() => {
     document.documentElement.style.setProperty("--scrollbar-thumb", theme.scrollbarThumb);
     document.documentElement.style.setProperty("--scrollbar-thumb-hover", theme.scrollbarHover);
     document.documentElement.style.setProperty("--scrollbar-track", theme.scrollbarTrack);
-  }
+  }, [theme]);
 
   return (
     <ThemeContext.Provider value={{ themeKey, theme, setTheme: setThemeKey }}>
