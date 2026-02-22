@@ -5,14 +5,34 @@ import { useTheme } from "@/context/ThemeContext";
 
 export default function StingerTransition() {
     const [isVisible, setIsVisible] = useState(true);
+    const [hasStarted, setHasStarted] = useState(false);
     const { theme } = useTheme();
 
     useEffect(() => {
-        const timer = setTimeout(() => {
-            setIsVisible(false);
-        }, 1500);
-        return () => clearTimeout(timer);
+        if (typeof document !== "undefined") {
+            if (document.visibilityState === "visible") {
+                setHasStarted(true);
+            }
+
+            const handleVisibilityChange = () => {
+                if (document.visibilityState === "visible") {
+                    setHasStarted(true);
+                }
+            };
+
+            document.addEventListener("visibilitychange", handleVisibilityChange);
+            return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
+        }
     }, []);
+
+    useEffect(() => {
+        if (hasStarted) {
+            const timer = setTimeout(() => {
+                setIsVisible(false);
+            }, 1500);
+            return () => clearTimeout(timer);
+        }
+    }, [hasStarted]);
 
     if (!isVisible) return null;
 
@@ -34,8 +54,11 @@ export default function StingerTransition() {
                     className={`relative h-full w-full ${theme.backgroundAccentStinger}`}
                     style={{
                         width: `${100 / bars}vw`,
-                        animation: `stinger-slide 0.8s cubic-bezier(0.76, 0, 0.24, 1) forwards`,
-                        animationDelay: `${i * 0.15}s`,
+                        animationName: hasStarted ? "stinger-slide" : "none",
+                        animationDuration: "0.8s",
+                        animationTimingFunction: "cubic-bezier(0.76, 0, 0.24, 1)",
+                        animationFillMode: "forwards",
+                        animationDelay: hasStarted ? `${i * 0.15}s` : "0s",
                     }}
                 />
             ))}
