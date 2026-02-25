@@ -1,7 +1,7 @@
 "use client";
 
 import { useTheme } from "@/context/ThemeContext";
-import { AnimatePresence, motion, useInView, Variants } from "framer-motion";
+import { AnimatePresence, motion, useInView, Variants } from "motion/react";
 import { useRef, useState } from "react";
 import { FaCopy, FaCheck } from "react-icons/fa";
 import { profile, socialLinks } from "@/constants/constants";
@@ -11,7 +11,7 @@ import { IoIosSend } from "react-icons/io";
 export default function Contact() {
   const { theme } = useTheme();
   const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: false, amount: 0.1 });
+  const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
   const [copied, setCopied] = useState(false);
 
   const copyToClipboard = () => {

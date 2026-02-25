@@ -13,7 +13,7 @@ import {
   useMotionValue,
   useAnimationFrame,
   Variants,
-} from "framer-motion";
+} from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { smoothScrollTo } from "@/lib/utils";
 
@@ -175,7 +175,7 @@ const FloatingImage = ({ src, alt, isInView }: { src: string; alt: string; isInV
         alt={alt}
         width={600}
         height={600}
-        unoptimized // added because the image is a gif
+
         className="w-full max-w-sm rounded-full shadow-2xl object-cover relative z-10 brightness-[0.90] hover:brightness-100 transition-all duration-500"
       />
     </motion.div>
@@ -185,7 +185,7 @@ const FloatingImage = ({ src, alt, isInView }: { src: string; alt: string; isInV
 export default function Hero() {
   const { theme } = useTheme();
   const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: false, amount: 0.1 });
+  const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },

@@ -5,13 +5,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaGlobe, FaLinkedin } from "react-icons/fa";
 import { experiences } from "@/constants/constants";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView } from "motion/react";
 import { useRef } from "react";
 
 export default function Experience() {
   const { theme } = useTheme();
   const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: false, amount: 0.1 });
+  const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
 
   return (
     <section

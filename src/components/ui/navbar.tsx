@@ -78,15 +78,6 @@ export const Navbar = ({ children, className }: NavbarProps) => {
         className
       )}
     >
-      <style>
-        {`
-            @keyframes navbar-drop {
-                0% { transform: translateY(-150px); opacity: 0; }
-                50% { opacity: 1; }
-                100% { transform: translateY(0); opacity: 1; }
-            }
-        `}
-      </style>
       {React.Children.map(children, (child) =>
         React.isValidElement(child)
           ? React.cloneElement(

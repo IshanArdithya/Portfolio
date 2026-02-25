@@ -1,7 +1,7 @@
 "use client";
 
 import { useTheme } from "@/context/ThemeContext";
-import { motion, useInView, Variants, AnimatePresence } from "framer-motion";
+import { motion, useInView, Variants, AnimatePresence } from "motion/react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
 import { projects } from "@/constants/constants";
@@ -10,7 +10,7 @@ import { ProjectCard } from "@/components/ui/ProjectCard";
 export default function Projects() {
   const { theme } = useTheme();
   const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: false, amount: 0.1 });
+  const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },

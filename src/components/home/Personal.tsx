@@ -1,7 +1,7 @@
 "use client";
 
 import { useTheme } from "@/context/ThemeContext";
-import { motion, useInView, AnimatePresence, Variants } from "framer-motion";
+import { motion, useInView, AnimatePresence, Variants } from "motion/react";
 import { useRef, useState, useId, useCallback, memo, useEffect } from "react";
 import { WobbleCard } from "../ui/wobble-card";
 import { interests } from "@/constants/constants";
@@ -108,7 +108,7 @@ const PersonalCard = ({
 export default function Personal() {
   const { theme } = useTheme();
   const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: false, amount: 0.1 });
+  const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
   const [activeInterest, setActiveInterest] = useState<Interests | null>(null);
   const cardRef = useRef<HTMLDivElement | null>(null);
   const id = useId();
