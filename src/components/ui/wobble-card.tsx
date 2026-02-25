@@ -68,12 +68,23 @@ export const WobbleCard = ({
 const Noise = ({ isHovering }: { isHovering: boolean }) => {
   return (
     <div
-      className="absolute inset-0 w-full h-full scale-[1.2] transform [mask-image:radial-gradient(#fff,transparent,75%)]"
+      className="absolute inset-0 w-full h-full scale-[1.2] transform mask-[radial-gradient(#fff,transparent,75%)]"
       style={{
-        backgroundImage: "url(/noise.webp)",
-        backgroundSize: "30%",
         opacity: isHovering ? 0.06 : 0.1,
       }}
-    ></div>
+    >
+      <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+        <filter id="wobble-noise">
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency="0.65"
+            numOctaves="2"
+            stitchTiles="stitch"
+          />
+          <feColorMatrix type="saturate" values="0" />
+        </filter>
+        <rect width="100%" height="100%" filter="url(#wobble-noise)" />
+      </svg>
+    </div>
   );
 };

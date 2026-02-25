@@ -10,8 +10,6 @@ import { AnimatedCircleGridPattern } from "@/components/home/GridPattern";
 import {
   motion,
   useInView,
-  useMotionValue,
-  useAnimationFrame,
   Variants,
 } from "motion/react";
 import { useEffect, useRef, useState } from "react";
@@ -112,11 +110,6 @@ const AnimatedButton = ({
 
 const FloatingImage = ({ src, alt, isInView }: { src: string; alt: string; isInView: boolean }) => {
   const { theme } = useTheme();
-  const y = useMotionValue(0);
-
-  useAnimationFrame((t) => {
-    y.set(Math.sin(t / 1500) * 2);
-  });
 
   return (
     <motion.div
@@ -127,8 +120,7 @@ const FloatingImage = ({ src, alt, isInView }: { src: string; alt: string; isInV
         delay: 0.2,
         ease: [0, 0.71, 0.2, 1.01],
       }}
-      style={{ y }}
-      className="relative flex items-center justify-center p-5 md:p-7"
+      className="relative flex items-center justify-center p-5 md:p-7 animate-float"
     >
       {/* outer ring */}
       <motion.svg
