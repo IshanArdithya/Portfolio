@@ -17,6 +17,11 @@ import {
   FaDiscord,
 } from "react-icons/fa";
 
+export const siteConfig = {
+  name: "Ishan Ardithya",
+  url: process.env.NEXT_PUBLIC_APP_URL || "https://ishanardithya.me",
+};
+
 export const navBar: NavBar[] = [
   {
     text: "Home",

@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/context/ThemeContext";
 import StingerTransition from "@/components/ui/StingerTransition";
 import CustomCursor from "@/components/ui/CustomCursor";
+import { siteConfig } from "@/constants/constants";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,10 +27,32 @@ const quicksand = Quicksand({
 });
 
 export const metadata: Metadata = {
-  title: "Ishan Ardithya",
-  description: "Personal portfolio of Ishan Ardithya",
+  metadataBase: new URL(siteConfig.url),
+  title: siteConfig.name,
+  description: `Personal portfolio of ${siteConfig.name}`,
   icons: {
     icon: "/favicon.ico",
+  },
+  openGraph: {
+    title: siteConfig.name,
+    description: `Personal portfolio of ${siteConfig.name}`,
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    images: [
+      {
+        url: "/images/og/og.webp",
+        width: 1200,
+        height: 630,
+        alt: `${siteConfig.name} | Software Engineer`,
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.name,
+    description: `Personal portfolio of ${siteConfig.name}`,
+    images: ["/images/og/og.webp"],
   },
 };
 
