@@ -10,6 +10,6 @@ export default function ThemedPageWrapper({
     const { theme } = useTheme();
 
     return (
-        <div className={`${theme.background} ${theme.text}`}>{children}</div>
+        <main className={`${theme.background} ${theme.text}`}>{children}</main>
     );
 }

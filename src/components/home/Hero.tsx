@@ -219,8 +219,9 @@ export default function Hero() {
 
   return (
     <>
-      <motion.div
+      <motion.section
         ref={sectionRef}
+        aria-label="Hero"
         className={`relative min-h-dvh flex flex-col items-center justify-between px-6 pt-32 pb-10 md:pt-40 md:pb-10 overflow-hidden`}
       >
         <div className="relative w-full flex flex-col items-center justify-center max-w-7xl">
@@ -394,6 +395,7 @@ export default function Hero() {
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={link.name}
                   className={`${theme.hoverText} text-xl`}
                   whileHover={{
                     scale: 1.2,
@@ -417,7 +419,7 @@ export default function Hero() {
             ></motion.div>
           </div>
         </motion.section>
-      </motion.div>
+      </motion.section>
     </>
   );
 }

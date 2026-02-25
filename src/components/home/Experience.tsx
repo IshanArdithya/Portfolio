@@ -19,14 +19,14 @@ export default function Experience() {
       className={`relative flex flex-col items-center justify-between px-6 py-10 md:py-20 overflow-hidden`}
     >
       <div className="relative w-full max-w-5xl mx-auto">
-        <motion.h1
+        <motion.h2
           className="text-3xl md:text-5xl font-bold text-center mb-8 md:mb-16"
           initial={{ opacity: 0, y: -20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
           transition={{ duration: 0.7, type: "spring", stiffness: 100 }}
         >
           Experience
-        </motion.h1>
+        </motion.h2>
 
         <div className="flex flex-col gap-8">
           {experiences.map((exp, index) => (
