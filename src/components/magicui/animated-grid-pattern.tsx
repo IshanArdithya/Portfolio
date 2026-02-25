@@ -17,8 +17,7 @@ export interface AnimatedGridPatternProps
   height?: number;
   x?: number;
   y?: number;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  strokeDasharray?: any;
+  strokeDasharray?: number | string;
   numSquares?: number;
   maxOpacity?: number;
   duration?: number;
@@ -65,9 +64,9 @@ export function AnimatedGridPattern({
       currentSquares.map((sq) =>
         sq.id === id
           ? {
-              ...sq,
-              pos: getPos(),
-            }
+            ...sq,
+            pos: getPos(),
+          }
           : sq
       )
     );
