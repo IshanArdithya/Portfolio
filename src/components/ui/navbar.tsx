@@ -78,15 +78,6 @@ export const Navbar = ({ children, className }: NavbarProps) => {
         className
       )}
     >
-      <style>
-        {`
-            @keyframes navbar-drop {
-                0% { transform: translateY(-150px); opacity: 0; }
-                50% { opacity: 1; }
-                100% { transform: translateY(0); opacity: 1; }
-            }
-        `}
-      </style>
       {React.Children.map(children, (child) =>
         React.isValidElement(child)
           ? React.cloneElement(
@@ -267,10 +258,19 @@ export const MobileNavToggle = ({
 }) => {
   const { theme } = useTheme();
 
-  return isOpen ? (
-    <IoMdClose className={theme.text} onClick={onClick} />
-  ) : (
-    <IoMdMenu className={theme.text} onClick={onClick} />
+  return (
+    <button
+      onClick={onClick}
+      aria-label={isOpen ? "Close menu" : "Open menu"}
+      aria-expanded={isOpen}
+      className="cursor-pointer p-1"
+    >
+      {isOpen ? (
+        <IoMdClose className={theme.text} />
+      ) : (
+        <IoMdMenu className={theme.text} />
+      )}
+    </button>
   );
 };
 

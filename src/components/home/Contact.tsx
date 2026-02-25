@@ -1,7 +1,7 @@
 "use client";
 
 import { useTheme } from "@/context/ThemeContext";
-import { AnimatePresence, motion, useInView, Variants } from "framer-motion";
+import { AnimatePresence, motion, useInView, Variants } from "motion/react";
 import { useRef, useState } from "react";
 import { FaCopy, FaCheck } from "react-icons/fa";
 import { profile, socialLinks } from "@/constants/constants";
@@ -11,7 +11,7 @@ import { IoIosSend } from "react-icons/io";
 export default function Contact() {
   const { theme } = useTheme();
   const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: false, amount: 0.1 });
+  const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
   const [copied, setCopied] = useState(false);
 
   const copyToClipboard = () => {
@@ -117,6 +117,7 @@ export default function Contact() {
               {/* copy email button */}
               <button
                 onClick={copyToClipboard}
+                aria-label="Copy email address"
                 className="group/btn relative w-full sm:w-auto min-w-[300px] flex items-center justify-between bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl p-1.5 pr-4 md:p-2 md:pr-6 transition-all duration-300 active:scale-[0.98] cursor-pointer"
               >
                 <div className="flex items-center gap-3 md:gap-4">

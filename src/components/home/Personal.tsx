@@ -1,7 +1,7 @@
 "use client";
 
 import { useTheme } from "@/context/ThemeContext";
-import { motion, useInView, AnimatePresence, Variants } from "framer-motion";
+import { motion, useInView, AnimatePresence, Variants } from "motion/react";
 import { useRef, useState, useId, useCallback, memo, useEffect } from "react";
 import { WobbleCard } from "../ui/wobble-card";
 import { interests } from "@/constants/constants";
@@ -108,7 +108,7 @@ const PersonalCard = ({
 export default function Personal() {
   const { theme } = useTheme();
   const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: false, amount: 0.1 });
+  const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
   const [activeInterest, setActiveInterest] = useState<Interests | null>(null);
   const cardRef = useRef<HTMLDivElement | null>(null);
   const id = useId();
@@ -154,14 +154,14 @@ export default function Personal() {
       className={`relative flex flex-col items-center justify-between px-6 py-10 md:py-20 overflow-hidden`}
     >
       <div className="relative w-full max-w-7xl mx-auto">
-        <motion.h1
+        <motion.h2
           className="text-3xl md:text-5xl font-bold text-center mb-8 md:mb-16"
           initial={{ opacity: 0, y: -20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
           transition={{ duration: 0.7, type: "spring", stiffness: 100 }}
         >
           Personal
-        </motion.h1>
+        </motion.h2>
 
         <div className="flex overflow-x-auto pt-3 pb-8 -mx-6 px-6 snap-x snap-mandatory gap-6 md:grid md:grid-cols-1 lg:grid-cols-3 md:gap-6 md:pt-0 md:pb-0 md:mx-0 md:px-0 md:overflow-visible scrollbar-hide [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
           {interests.map((interest, index) => (

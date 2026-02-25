@@ -1,7 +1,7 @@
 "use client";
 
 import { useTheme } from "@/context/ThemeContext";
-import { motion, Variants } from "framer-motion";
+import { motion, Variants } from "motion/react";
 import { ExternalLink } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -140,6 +140,7 @@ export const ProjectCard = ({ project, index, isActive }: ProjectCardProps) => {
                             src={project.image || "/images/projects/placeholder.webp"}
                             alt={project.name}
                             fill
+                            sizes="(max-width: 768px) 85vw, 33vw"
                             className="object-cover transition-transform duration-500 hover:scale-110"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />

@@ -27,9 +27,10 @@ export default function CustomCursor() {
         const ctx = canvas.getContext("2d");
         if (!ctx) return;
 
-        let animationFrameId: number;
+        let animationFrameId: number | null = null;
         let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
         let isHovering = false;
+        let idleTimer: ReturnType<typeof setTimeout> | null = null;
 
         const numPoints = 25;
         const points = Array.from({ length: numPoints }, () => ({ x: mouse.x, y: mouse.y }));
@@ -41,40 +42,6 @@ export default function CustomCursor() {
 
         window.addEventListener("resize", resizeCanvas);
         resizeCanvas();
-
-        const handleMouseMove = (e: MouseEvent) => {
-            const dx = e.clientX - mouse.x;
-            const dy = e.clientY - mouse.y;
-            const distance = Math.sqrt(dx * dx + dy * dy);
-            if (distance > 100) { // teleport without trail if cursor jumps
-                for (let i = 0; i < numPoints; i++) {
-                    points[i].x = e.clientX;
-                    points[i].y = e.clientY;
-                }
-            }
-
-            mouse.x = e.clientX;
-            mouse.y = e.clientY;
-        };
-
-        const handleMouseOver = (e: MouseEvent) => {
-            const target = e.target as HTMLElement;
-            if (
-                target.tagName.toLowerCase() === "a" ||
-                target.tagName.toLowerCase() === "button" ||
-                target.closest("a") ||
-                target.closest("button") ||
-                target.classList.contains("cursor-pointer") ||
-                window.getComputedStyle(target).cursor === "pointer"
-            ) {
-                isHovering = true;
-            } else {
-                isHovering = false;
-            }
-        };
-
-        window.addEventListener("mousemove", handleMouseMove, { passive: true });
-        window.addEventListener("mouseover", handleMouseOver, { passive: true });
 
         let currentHeadRadius = 3;
 
@@ -104,16 +71,62 @@ export default function CustomCursor() {
                 ctx.stroke();
             }
 
-
             animationFrameId = requestAnimationFrame(render);
         };
-        render();
+
+        const startLoop = () => {
+            if (!animationFrameId) {
+                render();
+            }
+            if (idleTimer) clearTimeout(idleTimer);
+            idleTimer = setTimeout(() => {
+                if (animationFrameId) {
+                    cancelAnimationFrame(animationFrameId);
+                    animationFrameId = null;
+                }
+            }, 150);
+        };
+
+        const handleMouseMove = (e: MouseEvent) => {
+            const dx = e.clientX - mouse.x;
+            const dy = e.clientY - mouse.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            if (distance > 100) {
+                for (let i = 0; i < numPoints; i++) {
+                    points[i].x = e.clientX;
+                    points[i].y = e.clientY;
+                }
+            }
+
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+            startLoop();
+        };
+
+        const handleMouseOver = (e: MouseEvent) => {
+            const target = e.target as HTMLElement;
+            if (
+                target.tagName.toLowerCase() === "a" ||
+                target.tagName.toLowerCase() === "button" ||
+                target.closest("a") ||
+                target.closest("button") ||
+                target.classList.contains("cursor-pointer")
+            ) {
+                isHovering = true;
+            } else {
+                isHovering = false;
+            }
+        };
+
+        window.addEventListener("mousemove", handleMouseMove, { passive: true });
+        window.addEventListener("mouseover", handleMouseOver, { passive: true });
 
         return () => {
             window.removeEventListener("resize", resizeCanvas);
             window.removeEventListener("mousemove", handleMouseMove);
             window.removeEventListener("mouseover", handleMouseOver);
-            cancelAnimationFrame(animationFrameId);
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
+            if (idleTimer) clearTimeout(idleTimer);
         };
     }, [isMobile]);
 

@@ -5,6 +5,7 @@ export const AnimatedCircleGridPattern = () => (
   <AnimatedGridPattern
     width={75}
     height={75}
+    numSquares={20}
     maxOpacity={0.3}
     duration={0.9}
     strokeDasharray={0}
@@ -19,6 +20,7 @@ export const AnimatedCircleFooterGridPattern = () => (
   <AnimatedGridPattern
     width={75}
     height={75}
+    numSquares={20}
     maxOpacity={0.3}
     duration={0.9}
     strokeDasharray={0}

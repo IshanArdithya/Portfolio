@@ -1,7 +1,7 @@
 "use client";
 
 import { useTheme } from "@/context/ThemeContext";
-import { motion, useInView, Variants, AnimatePresence } from "framer-motion";
+import { motion, useInView, Variants, AnimatePresence } from "motion/react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
 import { projects } from "@/constants/constants";
@@ -10,7 +10,7 @@ import { ProjectCard } from "@/components/ui/ProjectCard";
 export default function Projects() {
   const { theme } = useTheme();
   const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: false, amount: 0.1 });
+  const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -105,14 +105,14 @@ export default function Projects() {
       <div className="relative w-full max-w-7xl mx-auto">
         {/* header */}
         <div className="flex flex-col items-center justify-center mb-8 md:mb-16 gap-4">
-          <motion.h1
+          <motion.h2
             className="text-3xl md:text-5xl font-bold text-center"
             initial={{ opacity: 0, y: -20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
             transition={{ duration: 0.7, type: "spring", stiffness: 100 }}
           >
             Projects
-          </motion.h1>
+          </motion.h2>
         </div>
 
         {/* carousel container with side nav */}

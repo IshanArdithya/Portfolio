@@ -5,34 +5,14 @@ import { useTheme } from "@/context/ThemeContext";
 
 export default function StingerTransition() {
     const [isVisible, setIsVisible] = useState(true);
-    const [hasStarted, setHasStarted] = useState(false);
     const { theme } = useTheme();
 
     useEffect(() => {
-        if (typeof document !== "undefined") {
-            if (document.visibilityState === "visible") {
-                setHasStarted(true);
-            }
-
-            const handleVisibilityChange = () => {
-                if (document.visibilityState === "visible") {
-                    setHasStarted(true);
-                }
-            };
-
-            document.addEventListener("visibilitychange", handleVisibilityChange);
-            return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
-        }
+        const timer = setTimeout(() => {
+            setIsVisible(false);
+        }, 1100);
+        return () => clearTimeout(timer);
     }, []);
-
-    useEffect(() => {
-        if (hasStarted) {
-            const timer = setTimeout(() => {
-                setIsVisible(false);
-            }, 1500);
-            return () => clearTimeout(timer);
-        }
-    }, [hasStarted]);
 
     if (!isVisible) return null;
 
@@ -43,25 +23,17 @@ export default function StingerTransition() {
             className="fixed inset-0 pointer-events-none flex w-screen h-screen overflow-hidden"
             style={{ zIndex: 9999999 }}
         >
-            <style>
-                {`
-                    @keyframes stinger-slide {
-                        0% { transform: translateY(0); }
-                        100% { transform: translateY(100vh); }
-                    }
-                `}
-            </style>
             {Array.from({ length: bars }).map((_, i) => (
                 <div
                     key={i}
                     className={`relative h-full w-full ${theme.backgroundAccentStinger}`}
                     style={{
                         width: `${100 / bars}vw`,
-                        animationName: hasStarted ? "stinger-slide" : "none",
+                        animationName: "stinger-slide",
                         animationDuration: "0.8s",
                         animationTimingFunction: "cubic-bezier(0.76, 0, 0.24, 1)",
                         animationFillMode: "forwards",
-                        animationDelay: hasStarted ? `${i * 0.15}s` : "0s",
+                        animationDelay: `${i * 0.15}s`,
                     }}
                 />
             ))}
