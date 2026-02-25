@@ -1,6 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
-@import "../../node_modules/typeface-inter/inter.css";
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -71,6 +68,17 @@
     100% {
       transform: translateZ(0) rotate(360deg);
     }
+  }
+
+}
+
+@keyframes stinger-slide {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(100vh);
   }
 }
 
@@ -150,7 +158,7 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: "Inter", "Quicksand", sans-serif;
+    font-family: var(--font-inter), var(--font-quicksand), sans-serif;
   }
 
   ::selection {
@@ -211,14 +219,17 @@
     width: 6px;
     height: 6px;
   }
+
   .dark-modal-scrollbar::-webkit-scrollbar-track {
     background: #121212;
     border-radius: 8px;
   }
+
   .dark-modal-scrollbar::-webkit-scrollbar-thumb {
     background: #333333;
     border-radius: 9999px;
   }
+
   .dark-modal-scrollbar::-webkit-scrollbar-thumb:hover {
     background: #444444;
   }
