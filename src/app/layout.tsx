@@ -28,13 +28,13 @@ const quicksand = Quicksand({
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
-  title: siteConfig.name,
+  title: `${siteConfig.name} | Portfolio`,
   description: `Personal portfolio of ${siteConfig.name}`,
   icons: {
     icon: "/favicon.ico",
   },
   openGraph: {
-    title: siteConfig.name,
+    title: `${siteConfig.name} | Portfolio`,
     description: `Personal portfolio of ${siteConfig.name}`,
     url: siteConfig.url,
     siteName: siteConfig.name,
