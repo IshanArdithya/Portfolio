@@ -54,6 +54,9 @@ export const metadata: Metadata = {
     description: `Personal portfolio of ${siteConfig.name}`,
     images: ["/images/og/og2.webp"],
   },
+  verification: {
+    google: "w040iEsUHl6p0pz2gJQiDckjORv3wEhLmelf2EJ4ojA",
+  },
 };
 
 export default function RootLayout({
