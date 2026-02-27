@@ -19,7 +19,13 @@ import {
 
 export const siteConfig = {
   name: "Ishan Ardithya",
+  fullName: "Ishan Ardithya Bandarigoda",
   url: process.env.NEXT_PUBLIC_APP_URL || "https://ishanardithya.me",
+  jobTitle: "Software Engineer",
+  links: {
+    linkedin: "https://www.linkedin.com/in/ishan-ardithya",
+    github: "https://github.com/IshanArdithya",
+  },
 };
 
 export const navBar: NavBar[] = [
@@ -46,7 +52,7 @@ export const navBar: NavBar[] = [
 ];
 
 export const profile: Profile = {
-  name: "Ishan Ardithya",
+  name: siteConfig.name,
   email: "ishanardithya@gmail.com",
   role: "Full-Stack Developer",
   roles: ["Full-Stack Developer", "Software Engineer"],
@@ -88,12 +94,12 @@ export const statistics: Statistic[] = [
 export const socialLinks: SocialLink[] = [
   {
     name: "LinkedIn",
-    url: "https://www.linkedin.com/in/ishan-ardithya",
+    url: siteConfig.links.linkedin,
     icon: FaLinkedin,
   },
   {
     name: "GitHub",
-    url: "https://github.com/IshanArdithya",
+    url: siteConfig.links.github,
     icon: FaGithub,
   },
   {

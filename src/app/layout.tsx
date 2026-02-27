@@ -43,7 +43,7 @@ export const metadata: Metadata = {
         url: "/images/og/og2.webp",
         width: 1200,
         height: 630,
-        alt: `${siteConfig.name} | Software Engineer`,
+        alt: `${siteConfig.name} | ${siteConfig.jobTitle}`,
       },
     ],
     type: "website",
@@ -61,8 +61,28 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: siteConfig.name,
+    alternateName: siteConfig.fullName,
+    url: siteConfig.url,
+    image: `${siteConfig.url}/images/profile/image.webp`,
+    jobTitle: siteConfig.jobTitle,
+    sameAs: [
+      siteConfig.links.linkedin,
+      siteConfig.links.github,
+    ],
+  };
+
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${quicksand.variable} antialiased`}
       >
